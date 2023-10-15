@@ -1,0 +1,82 @@
+/*--------------------------------------------------------------------*/
+.banner-overlay {
+    position: fixed;
+    z-index: 995;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: block;
+    animation: fadeIn linear 0.3s;
+  }
+.banner{
+  position: fixed;
+  z-index: 996;
+  width: 50%;
+  height: auto;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: #000000 0 3px 5px -1px;
+  display: block;
+  animation: fadeIn linear 0.3s;
+}
+.banner-image {
+  height: 340px;
+  overflow: hidden;
+}
+.banner-image img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+.banner-close {
+  display: block;
+  font-size: 27px;
+  padding-top: 5px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  color: #ff3366;
+  cursor: pointer;
+  position: absolute;
+}
+.banner-text {
+    /* height: 100px; */
+  /* height: auto; */
+}
+.banner-title {
+  color: #1a202c;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  padding-top: 15px;
+  padding-left: 20px;
+}
+.banner-text {
+  color: #1a202c;
+  padding-top: 5px;
+  padding-left: 20px;
+}
+.banner-button {
+  padding-top: 10px;
+  padding-right: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+.banner-btn {
+  display: flex;
+  padding: 10px 20px 10px 20px;
+  border-color: #ff3366;
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  color: #ff3366;
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+}

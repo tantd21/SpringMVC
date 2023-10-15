@@ -1,0 +1,106 @@
+.history-order{
+    margin-top: 250px;
+}
+
+body{
+    background-color: rgb(234 242 244);
+    height: 1000px;
+}
+
+.order_box{
+    /* border: 1px solid rgb(134, 131, 131); */
+    box-shadow: rgb(0 0 0 / 20%) 0px 15px 15px;
+    border-radius: 4px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.product_item{
+    display: flex;
+}
+
+.shopper_detail{
+    border-right: 2px solid rgb(136, 136, 136);
+}
+
+.btn_cancel_order{
+    outline: none;
+    background-color: rgb(242, 59, 59);
+    color: #fff;
+    border: 1px solid rgb(156, 154, 154);
+    border-radius: 3px;
+}
+
+
+
+.check-order{
+    background-color: #fff;
+    width: 40%;
+    /* border: 1px solid rgb(68, 66, 66); */
+    border-radius: 5px;
+    /* display: flex; */
+    box-shadow: rgb(0 0 0 / 20%) 0px 15px 15px;
+    /* justify-content: center; */
+}
+
+.check-group{
+    width: 100%;
+    /* border: 1px solid rgb(86, 84, 84); */
+    height: 40px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(236 242 245);
+    /* vertical-align: sub; */
+}
+
+.check-group i{
+    color: rgb(0 182 255);
+    margin-left: 10px;
+}
+
+.form-control-1{
+    background-color: rgb(236 242 245);
+    width: 80%;
+    border: none;
+    outline: none;
+    margin-left: 20px;
+}
+button{
+    outline: none !important;
+}
+
+.btn_check{
+    width: 100%;
+    font-weight: 500;
+    border: 2px solid rgb(255 53 36);
+}
+
+.btn_check:hover{
+    background-color: #fff;
+    color: rgb(255 53 36);
+    border: 2px solid rgb(255 53 36);
+}
+
+.btn_submit_cm{
+    background-color: #fff;
+    border: 1px solid rgb(0 182 255);
+    color: rgb(0 182 255);
+}
+
+.btn_submit_cm:hover{
+    background-color: rgb(0 182 255);
+    color: #fff;
+    border: 1px solid rgb(0 182 255);
+}
+
+.btn_cancel{
+    background-color: #fff;
+    color: red;
+    border: 1px solid red;
+}
+
+.btn_cancel:hover{
+    background-color: red;
+    color: #fff;
+    border: 1px solid red;
+}
