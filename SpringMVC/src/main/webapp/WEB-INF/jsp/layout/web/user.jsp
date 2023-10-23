@@ -94,7 +94,7 @@
 	<decorator:body></decorator:body>
 
 	<%@include file="/WEB-INF/jsp/layout/web/footer.jsp"%>
-.j/l
+	.j/l
 	<div class="modal fade" id="shopping" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg"
@@ -116,7 +116,7 @@
 							<img class="flashsalehotel_img" width="284px" height="160px"
 								style="object-fit: cover;"
 								src="https://product.hstatic.net/1000075078/product/bg-cloudfee-roasted-almond_ac9a236a27274a568ac6c8630047859f_large.jpg"
-						/.		alt="">
+								/.		alt="">
 						</div>
 						<div class="col-lg-7 col-sm-12">
 							<div class="product_name">
@@ -369,53 +369,47 @@ $(document).on('click','.size-main',function(){
                 "display": "none"
             });
         });
+        
+        
+
+        $(".btn-register").on("click", function() {
+                  var customer_name = $("input[name='customer_name_user']").val();
+                  var customer_phone = $("input[name='customer_phone_user']").val();
+                  var customer_email = $("input[name='customer_email_user']").val();
+                  var customer_password = $("input[name='customer_password1_user']").val();
+                  var customer_password2 = $("input[name='customer_password2_user']").val();
+                  alert("haha")
+              $.ajax({
+                  url: "/SpringMVC/register-customer?customerName=" + customer_name + "&customerEmail=" + customer_email + "&customerPhone=" + customer_phone + "&customerPass=" + customer_password + "&customerPassConfirm=" + customer_password2,
+                  method: 'POST',
+                  data: {},
+                  success: function(data) {
+                	  if(data == 'confirm'){
+                		  alert("loi1")
+                	  }
+                  else if(data == 'trung'){
+                    	  alert("loi")
+                          message_toastr("warning", "Cảnh Báo !", "Tai khoản Hoặc Email đã được đăng ký!");
+                      }else{
+                          $(".fromsignup").css({
+                              "display": "none"
+                          });
+                          $(".from-verycode").css({
+                              "display": "block"
+                          });
+                      }
+                  },
+                  error: function() {
+                      alert("Bug Huhu :<<");
+                  }
+              });   
+          });
     </script>
 
 
 	<!-- 	{{-- Js về đăng ký tài khoản --}} -->
 	<script>
-    $("#btn-register-account").on("click", function() {
-
-        if (document.getElementById("customer_checkbox_user").checked == true) {
-            var customer_name = $("input[name='customer_name_user']").val();
-            var customer_phone = $("input[name='customer_phone_user']").val();
-            var customer_email = $("input[name='customer_email_user']").val();
-            var customer_password = $("input[name='customer_password1_user']").val();
-            var customer_password2 = $("input[name='customer_password2_user']").val();
-            var _token = $("input[name='_token']").val();
-
-        $.ajax({
-            url: '{{ url('/user/create-customer') }}',
-            method: 'POST',
-            data: {
-                customer_name: customer_name,
-                customer_phone: customer_phone,
-                customer_email: customer_email,
-                customer_password: customer_password,
-                customer_password2: customer_password2,
-                _token: _token,
-            },
-            success: function(data) {
-                if(data == 'trung'){
-                    message_toastr("warning", "Cảnh Báo !", "Tai khoản Hoặc Email đã được đăng ký!");
-                }else{
-                    $(".fromsignup").css({
-                        "display": "none"
-                    });
-                    $(".from-verycode").css({
-                        "display": "block"
-                    });
-                }
-            },
-            error: function() {
-                alert("Bug Huhu :<<");
-            }
-        })
-        }else {
-            message_toastr("warning", "Cảnh Báo !", " Bạn Chưa Đồng Ý Điều Khoản !");
-        }
-        
-    });
+    
 
     $("#submit_verycode").on("click", function() {
 

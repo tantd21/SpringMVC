@@ -328,10 +328,10 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 
 					<a href="/SpringMVC/cua-hang" class="btn-all-product">See more</a>
 				</div>
-				<div class="button-dang-nhap">
+			<!-- 	<div class="button-dang-nhap">
 
 					<a href="/SpringMVC/dang-nhap" class="btn-all-product">đăng nhập</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

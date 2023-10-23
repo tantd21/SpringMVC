@@ -1,5 +1,7 @@
+<%@page import="spring.mvc.entity.CustomerJPA"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
 <div class="header">
@@ -8,6 +10,9 @@
 			<source src='<c:url value="/assets/web/video/videobanner.mp4"/>' />
 			Your browser does not support the video tag.
 		</video>
+		<%
+		CustomerJPA customer = (CustomerJPA) session.getAttribute("customer");
+		%>
 
 		<div class="ContentInVideo">
 
@@ -60,34 +65,34 @@
 							class="fa-solid fa-cart-shopping"></i> <span class="count-cart">
 								10 </span>
 					</a></li>
-					<!-- <span class="user_info"> @if (session()->get('customer_id')
-							!= null) <label class="navbar-item"> <a
-								href="{{ url('user/order?customer_id='.session()->get('customer_id').'') }}">
-									<label class="navbar-item-link"> <i
+					<span class="user_info"> <c:choose>
+							<c:when test="${ customer != null }">
+								<label class="navbar-item"> <a
+									href="{{ url('user/order?customer_id='.session()->get('customer_id').'') }}">
+										<label class="navbar-item-link"> <i
+											class="fa-solid fa-user"></i>
+									</label> <label class="navbar-item-link"> ${ customer.customerName }
+									</label>
+								</a>
+								</label>
+								<a href="/SpringMVC/logout"> <label class="navbar-item">
+										<label class="navbar-item-link"> <i
+											class="fa-solid fa-right-from-bracket"></i>
+									</label> <label class="navbar-item-link"> Đăng Xuất </label>
+								</label>
+								</a>
+							</c:when>
+
+							<c:otherwise>
+
+								</label>
+								<label for="nav-login-logout" class="navbar-item"> <label
+									for="nav-login-logout" class="navbar-item-link"> <i
 										class="fa-solid fa-user"></i>
-								</label> <label class="navbar-item-link"> {{
-										session()->get('customer_name') }} </label>
-							</a>
-						</label> <a href="{{ url('user/logout') }}"> <label
-								class="navbar-item"> <label class="navbar-item-link">
-										<i class="fa-solid fa-right-from-bracket"></i>
-								</label> <label class="navbar-item-link"> Đăng Xuất </label>
-							</label>
-						</a> @else <label for="nav-login-logout" class="navbar-item">
-								<label for="nav-login-logout" class="navbar-item-link">
-									<i class="fa-solid fa-user"></i>
-							</label> <label for="nav-login-logout" class="navbar-item-link">
-									<i class="fa-solid fa-caret-down"></i>
-							</label>
-						</label> @endif -->
-					<label for="nav-login-logout" class="navbar-item"> <label
-						for="nav-login-logout" class="navbar-item-link"> <i
-							class="fa-solid fa-user"></i>
-					</label> <label for="nav-login-logout" class="navbar-item-link"> <i
-							class="fa-solid fa-caret-down"></i>
-					</label>
-					</label>
-					</span>
+								</label> <label for="nav-login-logout" class="navbar-item-link">
+										<i class="fa-solid fa-caret-down"></i>
+								</label>
+								</label></span>
 					<li class="navbar-item "><label style="cursor: pointer;"
 						for="nav-input" class="navbar-item-link"> <i
 							class="fa-solid fa-bars"></i>
@@ -112,12 +117,30 @@
 						<label id="dangnhap" for="input-fromlogin"
 							class="nav-login-logout-box-item"> <span
 							class="nav-login-logout-box-text">Đăng Nhập</span>
-						</label> <label id="dangky" for="input-fromsignup"
+						</label>
+
+						<script>
+							const dangNhapLabel = document
+									.getElementById('dangnhap');
+							const dangKyLabel = document
+									.getElementById('dangky');
+
+							dangNhapLabel.addEventListener('click', function() {
+								window.location.href = '/SpringMVC/dang-nhap';
+							});
+							dangKyLabel.addEventListener('click', function() {
+								window.location.href = '/SpringMVC/dang-ky';
+							});
+						</script>
+						<label id="dangky" for="input-dangky"
 							class="nav-login-logout-box-item"> <span
 							class="nav-login-logout-box-text">Đăng Ký</span>
 						</label>
 					</div>
 				</div>
+				</c:otherwise>
+				</c:choose>
+
 
 				<!-- 	@include('pages.Login_Register.login')
 					@include('pages.Login_Register.register')

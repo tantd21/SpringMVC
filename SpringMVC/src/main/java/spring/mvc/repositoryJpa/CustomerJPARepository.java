@@ -12,7 +12,7 @@ public interface CustomerJPARepository extends JpaRepository<CustomerJPA, Long> 
 	
 	@Transactional
 	@Query("SELECT c FROM CustomerJPA c WHERE c.customerId =:customerId")
-	CustomerJPA findCustomerById(@Param("customerId") Long CustomerId);
+	CustomerJPA findCustomerById(@Param("customerId") Long customerId);
 	
 	@Transactional
 	@Query("SELECT c FROM CustomerJPA c WHERE c.customerEmail = :customerEmail")
@@ -21,4 +21,11 @@ public interface CustomerJPARepository extends JpaRepository<CustomerJPA, Long> 
 	@Transactional
 	@Query("SELECT c FROM CustomerJPA c WHERE c.customerPassword = :customerPassword")
 	CustomerJPA findByCustomerPassword(@Param("customerPassword") String customerPassword);
+	
+	@Transactional
+	@Query("SELECT c FROM CustomerJPA c WHERE c.customerEmail = :customerEmail AND c.customerPassword = :customerPass")
+	CustomerJPA findCustomerLogin(@Param("customerEmail") String customerEmail, @Param("customerPass") String customerPass);
+	@Transactional
+	@Query("SELECT c FROM CustomerJPA c WHERE c.customerEmail = :email")
+	CustomerJPA findCustomerIsExist(@Param("email") String email);
 }

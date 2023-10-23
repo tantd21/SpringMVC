@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "tbl_customer")
+@Table(name = "tbl_customers")
 public class CustomerJPA {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,22 +23,22 @@ public class CustomerJPA {
 
 	@Column(name = "customer_name")
 	private String customerName;
-	
+
 	@Column(name = "customer_phone")
 	private String customerPhone;
-	
+
 	@Column(name = "customer_email")
 	private String customerEmail;
-	
+
 	@Column(name = "customer_password")
 	private String customerPassword;
-	
+
 	@Column(name = "customer_status")
 	private String customerStatus;
-	
+
 	@Column(name = "order_boom")
 	private String orderBoom;
-	
+
 	public Long getCustomerId() {
 		return customerId;
 	}
@@ -119,14 +119,6 @@ public class CustomerJPA {
 		this.updatedAt = updatedAt;
 	}
 
-	public Date getDeletedAt() {
-		return deletedAt;
-	}
-
-	public void setDeletedAt(Date deletedAt) {
-		this.deletedAt = deletedAt;
-	}
-
 	@Column(name = "total_order")
 	private String totalOrder;
 	@Column(name = "created_at", nullable = true)
@@ -138,20 +130,5 @@ public class CustomerJPA {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
-
-	@Column(name = "deleted_at", nullable = true)
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date deletedAt;
-
-	@PrePersist
-	protected void onCreate() {
-		createdAt = new Date();
-	}
-
-	@PreUpdate
-	protected void onUpdate() {
-		updatedAt = new Date();
-	}
 
 }
