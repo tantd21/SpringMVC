@@ -87,6 +87,7 @@ public class ProductJPA {
 	@JoinColumn(name = "category_id")
 	private CategoryJPA category;
 
+
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<GalleryProductJPA> galleryProducts;
 
@@ -113,6 +114,8 @@ public class ProductJPA {
 	public void setCategory(CategoryJPA category) {
 		this.category = category;
 	}
+	
+
 
 	public Long getProductId() {
 		return productId;
