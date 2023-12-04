@@ -31,18 +31,18 @@ public class CouponJPA {
 //	@Column(name = "product_id")
 //	private Long productId;
 
-	@OneToOne
-	@JoinColumn(name = "product_id")
-	private ProductJPA product;
+//	@OneToOne
+//	@JoinColumn(name = "product_id")
+//	private ProductJPA product;
 	
 	@Column(name = "coupon_name")
 	private String couponName;
 
-	@Column(name = "coupon_name_conde")
+	@Column(name = "coupon_name_code")
 	private String couponNameCode;
 
-	@Column(name = "coupon_decs")
-	private String couponDecs;
+	@Column(name = "coupon_desc")
+	private String couponDesc;
 
 	@Column(name = "coupon_qty_code")
 	private int couponQty;
@@ -99,12 +99,12 @@ public class CouponJPA {
 		this.couponNameCode = couponNameCode;
 	}
 
-	public String getCouponDecs() {
-		return couponDecs;
+	public String getCouponDesc() {
+		return couponDesc;
 	}
 
-	public void setCouponDecs(String couponDecs) {
-		this.couponDecs = couponDecs;
+	public void setCouponDesc(String couponDesc) {
+		this.couponDesc = couponDesc;
 	}
 
 	public int getCouponQty() {
@@ -168,13 +168,13 @@ public class CouponJPA {
 		updatedAt = new Date();
 	}
 	
-	public ProductJPA getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductJPA product) {
-		this.product = product;
-	}
+//	public ProductJPA getProduct() {
+//		return product;
+//	}
+//
+//	public void setProduct(ProductJPA product) {
+//		this.product = product;
+//	}
 
 
 	

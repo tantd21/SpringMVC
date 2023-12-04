@@ -240,9 +240,9 @@
 					<ul class="nav flex-column sub-menu">
 						<li class="nav-item">Coupon Manage</li>
 						<li class="nav-item"><a class="nav-link"
-							href="{{ URL::to('admin/coupon/all-coupon') }}">Coupon List</a></li>
+							href="/SpringMVC/admin/coupons">Coupon List</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="{{ URL::to('admin/coupon/add-coupon') }}">Add Coupon</a></li>
+							href="/SpringMVC/admin/coupons/add-coupon">Add Coupon</a></li>
 					</ul>
 
 					<ul class="nav flex-column sub-menu">

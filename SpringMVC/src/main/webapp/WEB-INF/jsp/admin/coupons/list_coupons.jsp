@@ -79,7 +79,7 @@
 							<tr>
 								<td>${ coupon.couponName }</td>
 								<td>${ coupon.couponQty }</td>
-								<td>${ coupon.couponDecs }</td>
+								<td>${ coupon.couponDesc }</td>
 								<td> <a
 									href="/SpringMVC/admin/coupons/edit-coupon?couponId=${ coupon.couponId }">
 										<button type="button"

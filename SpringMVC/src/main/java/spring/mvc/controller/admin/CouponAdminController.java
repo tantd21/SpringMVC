@@ -39,7 +39,7 @@ public class CouponAdminController {
 	@RequestMapping("/edit-coupon")
 	public ModelAndView viewEditCoupon(@RequestParam("couponId") Long cateLong) {
 		ModelAndView mav = new ModelAndView("/admin/coupons/edit_coupon");
-		mav.addObject("coupon", impCouponJPAService.findCouponJPAById(cateLong));
+		mav.addObject("coupon", impCouponJPAService.findCouponById(cateLong));
 		return mav;
 	}
 	

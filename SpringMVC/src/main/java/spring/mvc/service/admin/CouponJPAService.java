@@ -1,5 +1,6 @@
 package spring.mvc.service.admin;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import spring.mvc.entity.CategoryJPA;
 import spring.mvc.entity.CouponJPA;
 import spring.mvc.repositoryJpa.CouponJPARepository;
 
@@ -16,10 +18,11 @@ import spring.mvc.repositoryJpa.CouponJPARepository;
 public class CouponJPAService implements ImpCouponJPAService {
 	@Autowired
 	CouponJPARepository couponJPARepository;
+	
 
 
 
-	@Override
+	
 	public Page<CouponJPA> getAllCoupons(Optional<Integer> p) {
 		PageRequest pageRequest = new PageRequest(p.orElse(0), 5);
 		Pageable pageable = pageRequest;
@@ -28,19 +31,18 @@ public class CouponJPAService implements ImpCouponJPAService {
 	}
 
 	@Override
-	public boolean saveCoupon(CouponJPA coupon) {
-		return false;
+	public void saveCoupon(CouponJPA couponJPA) {
+		couponJPARepository.save(couponJPA);
 		
 	}
 	@Override
-	public boolean updateCoupon(CouponJPA coupon) {
-		return false;
+	public void updateCoupon(CouponJPA couponJPA) {
+		couponJPARepository.save(couponJPA);
 	
 	}
 	
 	@Override
 	public CouponJPA findCouponById(Long couponId) {
-		// TODO Auto-generated method stub
 		return couponJPARepository.findCouponById(couponId);
 	}
 	@Override

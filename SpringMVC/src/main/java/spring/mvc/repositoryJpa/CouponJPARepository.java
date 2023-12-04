@@ -15,7 +15,7 @@ import spring.mvc.entity.FlashsaleJPA;
 @Repository
 public interface CouponJPARepository extends JpaRepository<CouponJPA, Long> {
 	@Transactional
-	@Query("SELECT p FROM CouponJPA p WHERE p.couponId =:couponId")
+	@Query("SELECT c FROM CouponJPA c WHERE c.couponId =:couponId")
 	CouponJPA findCouponById(@Param("couponId") Long couponId);
 	
 	@Transactional
