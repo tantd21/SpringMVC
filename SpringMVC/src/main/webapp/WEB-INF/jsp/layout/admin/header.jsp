@@ -254,26 +254,20 @@
 					</ul>
 
 				</div></li>
-				<li class="nav-item"><a class="nav-link"
-				data-bs-toggle="collapse" href="#ui-basic-coupon"
-				aria-expanded="false" aria-controls="ui-basic"> <span
-					class="menu-title">Event Sales Manage</span> <i
-					class="menu-arrow"></i> <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-			</a>
-				<div class="collapse" id="ui-basic-coupon">
+				
+			<li class="nav-item"><a class="nav-link"
+				data-bs-toggle="collapse" href="#ui-basic-order"
+				aria-expanded="false" aria-controls="ui-basic"> <span 
+				class="menu-title">Order Manage</span>
+					<i class="mdi mdi-chart-bar menu-icon"></i>
+			</a><div class="collapse" id="ui-basic-order">
 					<ul class="nav flex-column sub-menu">
 						<li class="nav-item">Order Manage</li>
 						<li class="nav-item"><a class="nav-link"
-							href="/SpringMVC/admin/coupons">Order List</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="/SpringMVC/admin/coupons/add-coupon">Add Coupon</a></li>
+							href="/SpringMVC/admin/orders">Order List</a></li>						
 					</ul>
-
-				</div></li>
-			<li class="nav-item"><a class="nav-link"
-				href="pages/charts/chartjs.html"> <span class="menu-title">Charts</span>
-					<i class="mdi mdi-chart-bar menu-icon"></i>
-			</a></li>
+					
+					</div></li>
 			<li class="nav-item"><a class="nav-link"
 				href="pages/tables/basic-table.html"> <span class="menu-title">Tables</span>
 					<i class="mdi mdi-table-large menu-icon"></i>
