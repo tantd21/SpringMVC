@@ -9,7 +9,7 @@ import spring.mvc.entity.OrderJPA;
 
 public interface ImpOrderJPAService {
     public List<OrderJPA> getAllOrderJPAs();
-    public Page<OrderJPA> getAllOrderJPAs(Optional<Integer> p);
+    public Page<OrderJPA> getAllOrders(Optional<Integer> p);
     public void saveOrder(OrderJPA orderJPA);
     public void updateOrder(OrderJPA orderJPA);
     public OrderJPA findOrderJPAById(Long orderId);

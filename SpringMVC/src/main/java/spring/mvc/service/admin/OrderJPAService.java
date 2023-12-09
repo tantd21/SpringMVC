@@ -48,10 +48,6 @@ public class OrderJPAService implements ImpOrderJPAService{
 		orderJPARepository.deleteOrderJPA(orderID);
 	}
 
-	@Override
-	public Page<OrderJPA> getAllOrderJPAs(Optional<Integer> p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
