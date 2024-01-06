@@ -3,7 +3,9 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page"%>
+<%@ page import="spring.mvc.Until.Until"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="vn">
 
@@ -94,7 +96,7 @@
 	<decorator:body></decorator:body>
 
 	<%@include file="/WEB-INF/jsp/layout/web/footer.jsp"%>
-	.j/l
+
 	<div class="modal fade" id="shopping" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg"
@@ -177,6 +179,118 @@
 	</div>
 
 
+	<s:form id="login" class="fromlogin">
+		<div class="fromlogin-box">
+			<div class="fromlogin-title">
+				<label for=""><span>Đăng nhập</span></label>
+			</div>
+
+			<a href="{{ URL::to('/user/login-facebook') }}">
+				<div class="fromlogin-item">
+					<div class="fromlogin-item-logo">
+						<!-- <i class="fa-brands fa-facebook"></i> -->
+						<img width="30px" height="30px"
+							style="object-fit: cover; margin-left: -4px;"
+							src="{{ asset('public/fontend/assets/img/icon/fb-login-icon.png') }}"
+							alt="">
+					</div>
+					<div class="fromlogin-item-text">
+						<span style="margin-left: -3px;">Đăng nhập bằng facebook</span>
+					</div>
+				</div>
+			</a> <a href="{{ URL::to('/user/login-google') }}">
+				<div class="fromlogin-item">
+					<div class="fromlogin-item-logo">
+						<!-- <i class="fa-brands fa-google"></i> -->
+						<img width="24px" height="24px" style="object-fit: cover;"
+							src="{{ asset('public/fontend/assets/img/icon/gg-login-icon.png') }}"
+							alt="">
+					</div>
+					<div class="fromlogin-item-text">
+						<span>Đăng nhập bằng Google</span>
+					</div>
+				</div>
+			</a>
+			<div style="margin-top: 16px" class="fromlogin-item-input-box">
+				<input id="email" class="fromlogin-item-input mb-3" type="text"
+					name="customerEmail" required> <label
+					class="fromlogin-item-lable" for="">Tài khoản Hoặc Email</label> <span
+					class="form-message mb-2"></span>
+			</div>
+			<div style="margin-top: 30px;" class="fromlogin-item-input-box">
+				<input id="password" class="fromlogin-item-input mb-3"
+					type="password" name="customerPassword" required> <label
+					class="fromlogin-item-lable" for="">Mật khẩu</label> <span
+					class="form-message mb-2"></span>
+			</div>
+			<input type="button" class="fromlogin-btn" value="Đăng nhập"
+				id="btn-login-submit">
+			<div style="cursor: pointer" id="recoverypassaccount"
+				class="fromlogin-restore">
+				<span>Khôi phục mật khẩu</span>
+			</div>
+			<div class="fromlogin-end">
+				<span>Chưa có tài khoản?</span> <span id="registeraccount"
+					style="cursor: pointer; color: #00b6f3;">Đăng ký tài khoản</span>
+			</div>
+		</div>
+	</s:form>
+
+
+	<form id="form-1" class="fromsignup" action="" method="post">
+		<div class="fromsignup-box">
+			<div style="padding-bottom: 20px" class="fromsignup-title">
+				<label for=""><span>Đăng ký</span></label>
+			</div>
+
+			<div class="fromsignup-text">
+				<span>Hoặc ký bằng số điện thoại</span>
+			</div>
+			<div style="margin: 0;" class="fromsignup-item-input-box">
+				<input id="fullname" class="fromsignup-item-input" type="text"
+					name="customer_name_user" required> <label for="fullname"
+					class="fromsignup-item-lable">Nhập tên đăng nhập</label> <span
+					class="form-message"></span>
+			</div>
+			<div class="fromsignup-item-input-box">
+				<input id="phone" class="fromsignup-item-input" type="text"
+					name="customer_phone_user" required> <label for=""
+					class="fromsignup-item-lable">Nhập điện thoại</label> <span
+					class="form-message"></span>
+			</div>
+			<div class="fromsignup-item-input-box">
+				<input id="email" class="fromsignup-item-input" type="text"
+					name="customer_email_user" required> <label for="email"
+					class="fromsignup-item-lable">Nhập email</label> <span
+					class="form-message"></span>
+			</div>
+			<div class="fromsignup-item-input-box">
+				<input id="password1" class="fromsignup-item-input" type="text"
+					name="customer_password1_user" required> <label
+					for="password" class="fromsignup-item-lable">Nhập mật khẩu</label>
+				<span class="form-message"></span>
+			</div>
+			<div class="fromsignup-item-input-box mb-5">
+				<input id="password_confirmation" class="fromsignup-item-input"
+					type="text" name="customer_password2_user" required> <label
+					for="password_confirmation" class="fromsignup-item-lable">Nhập
+					lại mật khẩu</label> <span class="form-message"></span>
+			</div>
+
+			<div>
+				<input id="customer_checkbox_user" type="checkbox"
+					name="customer_checkbox_user" value="on"> <label>Đồng
+					ý với tất cả các Điều khoản</label> <span class="form-message"></span>
+			</div>
+			<input style="margin-top: 10px" class="fromsignup-btn" type="button"
+				value="Đăng ký" id="btn-register-account">
+			<div style="padding-top: 16px; padding-bottom: 40px;"
+				class="fromsignup-end">
+				<span>Bạn đã có tài khoản?</span> <span id="loginaccount"
+					style="cursor: pointer; color: #00b6f3;">Đăng nhập</span>
+			</div>
+		</div>
+	</form>
 
 	<!-- Kết thúc Footer  -->
 
@@ -369,50 +483,137 @@ $(document).on('click','.size-main',function(){
                 "display": "none"
             });
         });
+        $("#btn-login-submit").click(function() {
+            var customer_email = $("input[name='customerEmail']").val();
+            var customer_password = $("input[name='customerPassword']").val();
+        $.ajax({
+            url: '/SpringMVC/login?customerEmail=' + customer_email + "&customerPassword=" + customer_password,
+            method: 'POST',
+            data: {
+            },
+            success: function(data) {
+                if(data == "true"){
+                	window.location.reload();
+                }else{
+                	message_toastr("error", "Tài khoản hoặc mật khẩu sai!");
+                }
+            },
+            error: function() {
+                alert("Bug Huhu :<<");
+            }
+        })
+        });
         
+        $("#btn-register-account").click( function() {
+	        if (document.getElementById("customer_checkbox_user").checked == true) {
+	            var customer_name = $("input[name='customer_name_user']").val();
+	            var customer_phone = $("input[name='customer_phone_user']").val();
+	            var customer_email = $("input[name='customer_email_user']").val();
+	            var customer_password = $("input[name='customer_password1_user']").val();
+	            var customer_password2 = $("input[name='customer_password2_user']").val();
+	        $.ajax({
+	            url: '/SpringMVC/register?customerName=' + customer_name + '&customerPhone=' + customer_phone + "&customerEmail=" + customer_email + "&customerPassword=" + customer_password + "&customerPasswordConfirm=" + customer_password2,
+	            method: 'POST',
+	            data: {
+	            },
+	            success: function(data) {
+	                if(data == 'confirm'){
+	                    message_toastr("warning", "Mật khẩu không trùng khớp");
+	                }else if(data == 'trung'){
+	                	message_toastr("error", "Email này đã được sử dụng!");
+	                }else{
+	                	message_toastr("success", "Đăng kí tài khoản thành công!");
+	                    $(".fromsignup").css({
+	                        "display": "none"
+	                    });
+	                    $(".fromlogin").css({
+	                        "display": "flex"
+	                    });
+	                }
+	            },
+	            error: function() {
+	                alert("Bug Huhu :<<");
+	            }
+	        })
+	    }});
         
+        $('.modal').on('click', "input[name='size']", function(){
+            var product_type_id = $(this).val();
+            var product_id = $("#product_id").val();
+            $.ajax({
+                url: '/SpringMVC/load-price-product-type?productId=' + product_id + '&productTypeId=' + product_type_id,
+                method: 'GET',
+                data: {
+                },
+                success: function(data) {
+                    // load_cart();
+                    // $('#shopping').hide();
+                    // $('.button_cart').attr('data-dismiss', 'modal');
+                    $('.flashsalehotel_place .price').html(data);
+                },
+                error: function() {
+                    alert("Bug Huhu :<<");
+                }
+            }) 
+    })
+    
+    $(document).on("click", '.button_cart', function() {
+        var product_id = $("#product_id").val();       
+        var product_qty = $('#quantity').val();
+        var product_type = $("input[name='size']:checked").val();
+        if($("input[name='size']").is(':checked') == false){
+           
+            message_toastr('warning', 'Bạn chưa chọn size đồ uống !!');
+         
+            $('.button_cart').attr('data-dismiss', 'modal');
+        }else{
+            
+            $.ajax({
+                url: '/SpringMVC/save-cart?productId=' + product_id + '&productQuantity=' + product_qty + '&productTypeId=' + product_type,
+                method: 'get',
+                data: {
+                 
+                },
+                success: function(data) {
+                    // load_cart();
+                    // $('#shopping').hide();
+                    // $('.button_cart').attr('data-dismiss', 'modal');
+                    //load_quantity_cart();
+                    if(data == "customer"){
+                    	message_toastr("error",
+                                'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!',
+                                'Thông tin');
+                    }else{
+                        message_toastr("success",
+                            'Bạn đã thêm sản phẩm vào giỏ hàng!!!',
+                            'Thành công');                    	
+                    }
+                },
+                error: function() {
+                    alert("Bug Huhu :<<");
+                }
+            })
 
-        $(".btn-register").on("click", function() {
-                  var customer_name = $("input[name='customer_name_user']").val();
-                  var customer_phone = $("input[name='customer_phone_user']").val();
-                  var customer_email = $("input[name='customer_email_user']").val();
-                  var customer_password = $("input[name='customer_password1_user']").val();
-                  var customer_password2 = $("input[name='customer_password2_user']").val();
-                  alert("haha")
-              $.ajax({
-                  url: "/SpringMVC/register-customer?customerName=" + customer_name + "&customerEmail=" + customer_email + "&customerPhone=" + customer_phone + "&customerPass=" + customer_password + "&customerPassConfirm=" + customer_password2,
-                  method: 'POST',
-                  data: {},
-                  success: function(data) {
-                	  if(data == 'confirm'){
-                		  alert("loi1")
-                	  }
-                  else if(data == 'trung'){
-                    	  alert("loi")
-                          message_toastr("warning", "Cảnh Báo !", "Tai khoản Hoặc Email đã được đăng ký!");
-                      }else{
-                          $(".fromsignup").css({
-                              "display": "none"
-                          });
-                          $(".from-verycode").css({
-                              "display": "block"
-                          });
-                      }
-                  },
-                  error: function() {
-                      alert("Bug Huhu :<<");
-                  }
-              });   
-          });
+        }
+    });
+        
+        $("#cart").click(function(){
+        	if(${customer != null}){
+        		window.location.href = 'http://localhost:8080/SpringMVC/gio-hang/'
+        	}else{
+        		message_toastr("error",
+                        'Vui lòng đăng nhập để sử dụng giỏ hàng!',
+                        'Thông tin');
+        	}
+        })
     </script>
 
-
-	<!-- 	{{-- Js về đăng ký tài khoản --}} -->
 	<script>
-    
+	
+	
+	
 
     $("#submit_verycode").on("click", function() {
-
         var verycoderg = $("input[name='very_code']").val();
         var _token = $("input[name='_token']").val();
 
@@ -445,6 +646,8 @@ $(document).on('click','.size-main',function(){
             }
         })
     });
+    
+                  
 </script>
 
 	<script>
@@ -711,32 +914,7 @@ $(document).on('click','.size-main',function(){
         }
     });
 
-    $('.modal').on('click', "input[name='size']", function(){
-            // alert('hihi');
-            var product_type_id = $(this).val();
-            var product_id = $("#product_id").val();
-
-            // alert(product_type_id);
-            $.ajax({
-                url: '{{ url('/san-pham/edit-price') }}',
-                method: 'get',
-                data: {
-                   
-                    product_id: product_id,
-                    product_type_id: product_type_id,
-                    // product_type: product_type
-                },
-                success: function(data) {
-                    // load_cart();
-                    // $('#shopping').hide();
-                    // $('.button_cart').attr('data-dismiss', 'modal');
-                    $('.flashsalehotel_place .price').html(data);
-                },
-                error: function() {
-                    alert("Bug Huhu :<<");
-                }
-            })
-    })
+   
 
     $(document).on('click', '.cart-hover', function(){
         $('.modal').addClass('loading_product');

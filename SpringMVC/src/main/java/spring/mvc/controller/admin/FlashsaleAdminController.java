@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.mvc.entity.FlashsaleJPA;
@@ -39,7 +41,7 @@ public class FlashsaleAdminController {
 	@RequestMapping("/add-flashsale")
 	public ModelAndView viewAddFlashsale() {
 		ModelAndView mav = new ModelAndView("/admin/flashsale/add_flashsale");
-		mav.addObject("products", impProductService.getProductInNotFlashsale());
+		mav.addObject("products", impProductService.getProductNotInFlashsale());
 		return mav;
 	}
 	
@@ -49,8 +51,16 @@ public class FlashsaleAdminController {
 		return "redirect:/admin/products/flashsales";
 	}
 	
-	@PostMapping("update-flashsale")
+	@PostMapping("/update-flashsale")
 	public String updateFlashsale(@ModelAttribute("flashsale") FlashsaleJPA flashsaleJPA, @RequestParam("productId") Long prodLong, @RequestParam("productPrice") double productPrice) {
+		impFlashsaleJPAService.updateFlashsale(flashsaleJPA, prodLong, productPrice);
 		return "redirect:/admin/products/flashsales";
+	}
+	
+	@DeleteMapping("/delete-flashsale")
+	@ResponseBody
+	public String deleteFlashsale(@RequestParam("flashsaleId") Long flashsaleId, @RequestParam("productId") Long productId) {
+		impFlashsaleJPAService.deleteFlashsale(flashsaleId, productId);
+		return "Thành Công";
 	}
 }

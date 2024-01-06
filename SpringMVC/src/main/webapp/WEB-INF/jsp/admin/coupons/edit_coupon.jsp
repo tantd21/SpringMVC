@@ -2,21 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form"%>
-<meta charset="UTF-8">
 <body>
+
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css"
+		integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 	<div class="page-header">
 		<h3 class="page-title">
 			<span class="page-title-icon bg-gradient-primary text-white me-2">
-				<i class="mdi mdi-crosshairs-gps"></i>
-			</span> Coupon Manage
+				<i class="mdi mdi-certificate"></i>
+			</span> Quản Lý Mã Giảm Giá
 		</h3>
 		<nav aria-label="breadcrumb">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item active" aria-current="page"><i
 					class="mdi mdi-timetable"></i> <span> <?php
-                    $today = date('d/m/Y');
-                    echo $today;
-                    ?>
+                $today = date('d/m/Y');
+                echo $today;
+                ?>
 				</span></li>
 			</ul>
 		</nav>
@@ -24,78 +29,115 @@
 	<div class="col-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 style="margin-top: -15px" class="card-title">Add Coupon</h4>
-				<s:form class="forms-product" modelAttribute="coupon"
+				<h4 style="margin-top: -15px" class="card-title">Thêm Mã Giảm
+					Giá</h4>
+				<s:form class="forms-sample"
 					action="/SpringMVC/admin/coupons/update-coupon" method="post"
-					enctype="multipart/form-data">
-					<input type="text" name="couponId" value="${coupon.couponId }" hidden>
+					enctype="multipart/form-data" modelAttribute="coupon">
+					<input type="hidden" name="couponId" value="${ coupon.couponId }">
+					<input type="hidden" name="createdAt" value="${ coupon.createdAt }">
 					<div class="form-group">
-						<label for="exampleInputName1">Coupon Name</label> <input
-							type="text" name="couponName" class="form-control mb-2"
-							id="name" placeholder="Name" value="${ coupon.couponName }">
-						<span class="text-danger form-message pt-2"></span>
+						<label for="exampleInputName1">Tên Mã Giảm Giá</label> <input
+							type="text" name="couponName" value="${ coupon.couponName }"
+							class="form-control" id="" placeholder="Nhập Tên Mã Giảm Giá">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputName1">Mã Giảm Giá</label> <input
+							type="text" name="couponNameCode"
+							value="${ coupon.couponNameCode }" class="form-control" id=""
+							placeholder="Nhập Mã Giảm Giá">
+					</div>
+
+					<div class="form-group">
+						<label for="exampleTextarea1">Mô Tả Mã Giảm Giá</label>
+						<textarea rows="8" class="form-control" name="couponDesc" id="">${ coupon.couponDesc }</textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="exampleInputName1">Số Lượng Mã</label> <input
+							type="text" name="couponQtyCode"
+							value="${ coupon.couponQtyCode }" class="form-control" id=""
+							placeholder="Nhập Số Lượng Mã">
+					</div>
+
+					<div class="form-group">
+						<label for="">Tính Năng Của Mã</label> <select
+							class="form-control" name="coupon_condition">
+
+							<c:choose>
+								<c:when test="${ coupon.couponCondition == 1 }">
+									<option active value="1">Giảm Giá Theo %</option>
+									<option value="2">Giảm Giá Theo Số Tiền</option>
+								</c:when>
+
+								<c:otherwise>
+									<option active value="2">Giảm Giá Theo Số Tiền</option>
+									<option value="1">Giảm Giá Theo %</option>
+								</c:otherwise>
+							</c:choose>
+						</select>
 					</div>
 					<div class="form-group">
-						<label for="exampleTextarea1">Coupon Description</label>
-						<textarea rows="8" class="form-control mb-2" name="couponDesc"
-							id="desc">${ coupon.couponDesc }</textarea>
-						<br> <span class="text-danger form-message"></span>
+						<label for="exampleInputName1">Số Tiền Hoặc Số % Giảm Giá</label>
+						<input type="text" name="couponPriceSale"
+							value="${ coupon.couponPriceSale }" class="form-control" id=""
+							placeholder="Nhập Số Tiền Hoặc Số % Giảm Giá">
 					</div>
+
 					<div class="form-group">
-						<label for="exampleInputName1">Coupon Code</label> <input
-							type="text" name="couponQty" class="form-control mb-2"
-							id="qty" placeholder="Code" value="${ coupon.couponQty }">
-						<span class="text-danger form-message pt-2"></span>
+						<label for="exampleInputName1">Ngày bắt đầu</label> <input
+							type="text" autocomplete="off" name="couponDateStart"
+							class="form-control" id="date_start" placeholder="Ngày Bắt Đầu"
+							value="${ coupon.couponDateStart }">
 					</div>
-					<button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+
+					<div class="form-group">
+						<label for="exampleInputName1">Ngày kết thúc</label> <input
+							type="text" autocomplete="off" name="couponDateEnd"
+							class="form-control" id="date_end" placeholder="Ngày Kết Thúc"
+							value="${ coupon.couponDateEnd }">
+					</div>
+
+					<button type="submit" class="btn btn-gradient-primary me-2">Cập
+						Nhật</button>
 					<button class="btn btn-light">Cancel</button>
 				</s:form>
 			</div>
 		</div>
 	</div>
-	<script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
 
-        ClassicEditor
-            .create(document.querySelector('#editor1'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+		integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"
+		integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
+		integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
-        
-    </script>
-	<script src="{{ asset('public/fontend/assets/js/validate.js')}}"></script>
+		$('#date_start').datepicker(
+				{
+					dateFormat : "yy-mm-dd",
+					prevText : 'Tháng trước',
+					nextText : 'Tháng sau',
+					dayNamesMin : [ 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5',
+							'Thứ 6', 'Thứ 7', 'Chủ Nhật' ],
+					duration : 'slow',
+				});
+		$('#date_end').datepicker(
+				{
+					dateFormat : "yy-mm-dd",
+					prevText : 'Tháng trước',
+					nextText : 'Tháng sau',
+					dayNamesMin : [ 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5',
+							'Thứ 6', 'Thứ 7', 'Chủ Nhật' ],
+					duration : 'slow',
+				});
+	</script>
 
-	<%-- <script>
-             Validator({
-                 form: '.forms-product',
-                 errorSelector: '.form-message',
-                 rules: [
-                     Validator.isRequired('#name', 'Vui lòng nhập tên sản phẩm'),
-                     Validator.isRequired('#formFile', 'Vui lòng tải lên ảnh Sản Phẩm'),
-                     Validator.isRequired('#desc', 'Vui lòng nhập mô tả sản phẩm'),
-                     Validator.minPrice('#price', 20000),
-                     Validator.maxPrice('#price', 200000),
-                 ]
-             });
-     
-             $(':input[type="submit"]').prop('disabled', true);
-     
-             $('.form-control').blur(function(){
-                 if ($('#name').val() != '' && $('#desc').val() != ''  && $('#price').val() != '' && $('#price').val() >= 20000 && $('#price').val() <= 200000) {
-                     $(':input[type="submit"]').prop('disabled', false);
-                 }
-             })
-    </script> --%>
 </body>

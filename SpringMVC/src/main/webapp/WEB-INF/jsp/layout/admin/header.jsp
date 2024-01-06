@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+	
 <!-- partial:partials/_navbar.html -->
 <nav
 	class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -202,6 +202,31 @@
 					class="mdi mdi-home menu-icon"></i>
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
+				data-bs-toggle="collapse" href="#ui-customer" aria-expanded="false"
+				aria-controls="ui-customer"> <span class="menu-title">Customers
+						Manage</span> <i class="menu-arrow"></i> <i
+					class="mdi mdi-crosshairs-gps menu-icon"></i>
+			</a>
+				<div class="collapse" id="ui-customer">
+					<ul class="nav flex-column sub-menu">
+						<li class="nav-item"><a class="nav-link"
+							href="/SpringMVC/admin/customers">List Customers</a></li>
+					</ul>
+				</div></li>
+			<li class="nav-item"><a class="nav-link"
+				data-bs-toggle="collapse" href="#ui-order" aria-expanded="false"
+				aria-controls="ui-order"> <span class="menu-title">Orders
+						Manage</span> <i class="menu-arrow"></i> <i
+					class="mdi mdi-crosshairs-gps menu-icon"></i>
+			</a>
+				<div class="collapse" id="ui-order">
+					<ul class="nav flex-column sub-menu">
+						<li class="nav-item"><a class="nav-link"
+							href="/SpringMVC/admin/orders">List Orders</a></li>
+
+					</ul>
+				</div></li>
+			<li class="nav-item"><a class="nav-link"
 				data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
 				aria-controls="ui-basic"> <span class="menu-title">Product
 						Manage</span> <i class="menu-arrow"></i> <i
@@ -230,11 +255,27 @@
 								Category</a></li>
 					</ul>
 				</div></li>
+
+			<li class="nav-item"><a class="nav-link"
+				data-bs-toggle="collapse" href="#ui-product-type"
+				aria-expanded="false" aria-controls="ui-product-type"> <span
+					class="menu-title">Product Type Manage</span> <i class="menu-arrow"></i>
+					<i class="mdi mdi-crosshairs-gps menu-icon"></i>
+			</a>
+				<div class="collapse" id="ui-product-type">
+					<ul class="nav flex-column sub-menu">
+						<li class="nav-item"><a class="nav-link"
+							href="/SpringMVC/admin/product-types">List Product Type</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/SpringMVC/admin/product-types/add-product-type">Add
+								New Type</a></li>
+					</ul>
+				</div></li>
 			<li class="nav-item"><a class="nav-link"
 				data-bs-toggle="collapse" href="#ui-basic-coupon"
-				aria-expanded="false" aria-controls="ui-basic"> <span
-					class="menu-title">Event Sales Manage</span> <i
-					class="menu-arrow"></i> <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+				aria-expanded="false" aria-controls="ui-basic-coupon"> <span
+					class="menu-title">Event Sales Manage</span> <i class="menu-arrow"></i>
+					<i class="mdi mdi-crosshairs-gps menu-icon"></i>
 			</a>
 				<div class="collapse" id="ui-basic-coupon">
 					<ul class="nav flex-column sub-menu">
@@ -250,24 +291,16 @@
 						<li class="nav-item"><a class="nav-link"
 							href="/SpringMVC/admin/products/flashsales">Flashsale List</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="/SpringMVC/admin/products/flashsales/add-flashsale">Add Product To Flashsale</a></li>
-					</ul>
-
-				</div></li>
-				
-			<li class="nav-item"><a class="nav-link"
-				data-bs-toggle="collapse" href="#ui-basic-order"
-				aria-expanded="false" aria-controls="ui-basic"> <span 
-				class="menu-title">Order Manage</span>
-					<i class="mdi mdi-chart-bar menu-icon"></i>
-			</a><div class="collapse" id="ui-basic-order">
-					<ul class="nav flex-column sub-menu">
-						<li class="nav-item">Order Manage</li>
-						<li class="nav-item"><a class="nav-link"
-							href="/SpringMVC/admin/orders">Order List</a></li>						
+							href="/SpringMVC/admin/products/flashsales/add-flashsale">Add
+								Product To Flashsale</a></li>
 					</ul>
 					
-					</div></li>
+				</div></li>
+				<li class="nav-item"> <a class="nav-link" href="/SpringMVC/logout">Logout</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="pages/charts/chartjs.html"> <span class="menu-title">Charts</span>
+					<i class="mdi mdi-chart-bar menu-icon"></i>
+			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="pages/tables/basic-table.html"> <span class="menu-title">Tables</span>
 					<i class="mdi mdi-table-large menu-icon"></i>

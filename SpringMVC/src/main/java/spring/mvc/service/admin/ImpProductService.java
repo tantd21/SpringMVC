@@ -23,5 +23,6 @@ public interface ImpProductService {
 	public boolean deleteGallery(Long deleteId, String filename);
 	
 	public boolean updateGalleryContent(Long galleryId, String galleryContent, int type);
-	public List<ProductJPA> getProductInNotFlashsale();
+	public List<ProductJPA> getProductNotInFlashsale();
+	public String unActiveProduct(Long productId, int status);
 }

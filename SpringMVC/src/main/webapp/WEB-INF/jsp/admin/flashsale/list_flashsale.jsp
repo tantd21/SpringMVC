@@ -97,7 +97,8 @@
 									<button type="button"
 										class="btn btn-inverse-danger btn-icon btn-delete-force"
 										data-delete_id="${ flashsale.flashsaleId }"
-										 data-restore_id="0">
+										data-product_id="${ flashsale.product.productId }"
+										data-restore_id="0">
 										<i class="mdi mdi-delete-forever"></i>
 									</button></td>
 							</tr>
@@ -140,4 +141,27 @@
 			</c:if>
 		</ul>
 	</nav>
+	<script type="text/javascript">
+	$(".btn-delete-force").on("click", function() {
+		var deleteId = $(this).data("delete_id");
+		var productId = $(this).data("product_id")
+		var row = $(this).closest("tr");
+		alert(deleteId)
+		 $.ajax({
+		    url: "/SpringMVC/admin/products/flashsales/delete-flashsale?flashsaleId="+ deleteId + "&productId=" + productId, // Thay đổi đường dẫn dựa vào ứng dụng của bạn
+		    type: "DELETE",
+		    data: {
+		    },
+		    success: function(data) {
+		        // Xóa hàng khỏi bảng sau khi xóa thành công
+		        row.fadeOut("slow", function() {
+		            $(this).remove();
+		        });
+		    },
+		    error: function() {
+		        alert("Đã xảy ra lỗi khi xóa dữ liệu.");
+		    }
+		}); 
+	});
+	</script>
 </body>

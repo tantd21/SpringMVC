@@ -25,60 +25,57 @@
 		<div class="menumin-box">
 			<ul class="menumin-box-ul">
 				<li class="menumin-box-li">BoNoDrinks</li>
-				<c:if test="${ product.flashsale_status == 1 }">
+				<c:if test="${ product.flashsaleStatus == 1 }">
 					<li class="menumin-box-li"><i class="fa-solid fa-angle-right"></i></li>
 					<li class="menumin-box-li">Flashsale</li>
 				</c:if>
 				<li class="menumin-box-li"><i class="fa-solid fa-angle-right"></i></li>
-				<li class="menumin-box-li">${product.category_name}</li>
+				<li class="menumin-box-li">${product.category.categoryName}</li>
 				<li class="menumin-box-li"><i class="fa-solid fa-angle-right"></i></li>
-				<li class="menumin-box-li">${product.product_name}</li>
+				<li class="menumin-box-li">${product.productName}</li>
 			</ul>
 		</div>
 	</div>
-
-
 
 	<div class="card-product">
 		<div class="product-image">
 			<ul id="lightSlider">
 				<li
-					data-thumb='<c:url value="/assets/web/img/product/${ product.product_image }"/>'>
+					data-thumb='<c:url value="/assets/web/img/product/${ product.productImage }"/>'>
 					<img
-					src='<c:url value="/assets/web/img/product/${ product.product_image }"/>' />
+					src='<c:url value="/assets/web/img/product/${ product.productImage }"/>' />
 				</li>
-				<c:forEach items="${ galleryProducts }" var="item">
+				<c:forEach items="${ product.galleryProducts }" var="item">
 					<li
-						data-thumb='<c:url value="/assets/web/img/product/${ item.gallery_image_product }"/>'>
+						data-thumb='<c:url value="/assets/web/img/product/${ item.galleryImageProduct }"/>'>
 						<img
-						src='<c:url value="/assets/web/img/product/${ item.gallery_image_product }"/>' />
+						src='<c:url value="/assets/web/img/product/${ item.galleryImageProduct }"/>' />
 					</li>
 				</c:forEach>
-
 			</ul>
 		</div>
 
 		<div class="product-detail">
 			<div class="product-title">
-				<h2>${ product.product_name }
-					${product.flashsale.flashsale_price_sale }]</h2>
+				<h2>${ product.productName }
+					${product.flashsale.flashsalePriceSale }]</h2>
 			</div>
-			<input type="text" id="product_id" value="${ product.product_id }"
+			<input type="text" id="product_id" value="${ product.productId }"
 				hidden>
 
 			<div class="product-price"
 				style="font-size: 1.75rem; font-weight: 100">
 				<!-- @if (isset($flashsale)) -->
 				<c:choose>
-					<c:when test="${ product.flashsale_status == 1 }">
+					<c:when test="${ product.flashsaleStatus == 1 }">
 						<h3 style="font-size: 20px">
-							${ Until.convertNumber(product.flashsale.flashsale_price_sale) }
+							${ Until.convertNumber(product.flashsale.flashsalePriceSale) }
 							đ/<span style="text-decoration: line-through; font-size: 20px;">
-								${ Until.convertNumber(product.product_price) } đ</span>
+								${ Until.convertNumber(product.productPrice) } đ</span>
 						</h3>
 					</c:when>
 					<c:otherwise>
-						<h3 style="font-size: 20px">${ Until.convertNumber(product.product_price) }đ</h3>
+						<h3 style="font-size: 20px">${ Until.convertNumber(product.productPrice) }đ</h3>
 					</c:otherwise>
 				</c:choose>
 
@@ -92,10 +89,10 @@
 
 					<c:forEach items="${ productTypes }" var="item">
 						<div class="size-main">
-							<label class="size-detail" for="${ item.product_type_name }"><i
-								class="fas fa-coffee"></i> ${ item.product_type_name } + ${ Until.convertNumber(item.product_type_price) }
-								đ</label> <input id="${ item.product_type_name }"
-								value="${ item.product_type_id }" type="radio" name="size"
+							<label class="size-detail" for="${ item.productTypeName }"><i
+								class="fas fa-coffee"></i> ${ item.productTypeName } + ${ Until.convertNumber(item.productTypePrice) }
+								đ</label> <input id="${ item.productTypeName }"
+								value="${ item.productTypeId }" type="radio" name="size"
 								hidden>
 						</div>
 					</c:forEach>
@@ -138,10 +135,10 @@
 			<div class="chooseroomsbox-boxcontent">
 				<div class="chooseroomsbox-boxcontent-top">
 					<i class="fa-solid fa-star"></i> <span
-						style="margin-left: 15px; margin-top: 2px;">${ product.product_name }</span>
+						style="margin-left: 15px; margin-top: 2px;">${ product.productName }</span>
 				</div>
 				<div class="chooseroomsbox-boxcontent-bottom"
-					style="font-size: 16px">${ product.product_desc }</div>
+					style="font-size: 16px">${ product.productDesc }</div>
 			</div>
 		</div>
 	</div>
@@ -427,19 +424,19 @@
 							<div class="flashsalehotel_boxcontent_img_text">
 								<div class="flashsalehotel_img-box">
 									<a
-										href="/SpringMVC/san-pham/san-pham-chi-tiet?product_id= ${ product.product_id }"
+										href="/SpringMVC/san-pham/san-pham-chi-tiet?product_id= ${ product.productId }"
 										class="flashsalehotel_boxcontent_hover"> <img
 										class="flashsalehotel_img" width="284px" height="160px"
 										style="object-fit: cover;"
-										src='<c:url value="/assets/web/img/product/${ product.product_image }"/>'
+										src='<c:url value="/assets/web/img/product/${ product.productImage }"/>'
 										alt="">
 									</a>
 								</div>
 								<div class="flashsalehotel_text">
-									<div class="flashsalehotel_text-title">${ product.category_name }</div>
+									<div class="flashsalehotel_text-title">${ product.category.categoryName }</div>
 									<div class="flashsalehotel_place">
 										<div>
-											<i class="fa-solid fa-certificate"></i> ${ product.product_name }
+											<i class="fa-solid fa-certificate"></i> ${ product.productName }
 										</div>
 									</div>
 									<!-- <div class="flashsalehotel_text-evaluate">
@@ -453,24 +450,24 @@
 									<div class="flashsalehotel_text-time">Sản phầm cùng danh
 										mục</div>
 									<div class="flashsalehotel_text-box-price">
-										<c:if test="${ product.flashsale_status == 1 }">
+										<c:if test="${ product.flashsaleStatus == 1 }">
 											<div style="display: flex;">
 												<div class="flashsalehotel_text-box-price-two">
 
-													<span>${ Until.convertNumber(product.flashsale.flashsale_price_sale) }
+													<span>${ Until.convertNumber(product.flashsale.flashsalePriceSale) }
 														đ</span>
 												</div>
 												<div class="flashsalehotel_text-box-price-one">
 													<span>/</span>
 												</div>
 												<div class="flashsalehotel_text-box-price-one">
-													<span style="text-decoration: line-through">${ Until.convertNumber(product.product_price) }đ</span>
+													<span style="text-decoration: line-through">${ Until.convertNumber(product.productPrice) }đ</span>
 												</div>
 											</div>
 										</c:if>
-										<c:if test="${ product.flashsale_status == 0 }">
+										<c:if test="${ product.flashsaleStatus == 0 }">
 											<div class="flashsalehotel_text-box-price-two">
-												<span> ${ Until.convertNumber(product.product_price) }đ</span>
+												<span> ${ Until.convertNumber(product.productPrice) }đ</span>
 											</div>
 										</c:if>
 										<div class="flashsalehotel_text-box-price-three bordernhay">
@@ -518,24 +515,24 @@
 
 
 							<a
-								href="/san-pham/san-pham-chi-tiet?product_id= ${ item.product_id }"
+								href="/san-pham/san-pham-chi-tiet?product_id= ${ item.productId }"
 								class="flashsalehotel_boxcontent_hover">
 								<div class="flashsalehotel_boxcontent item">
 									<div class="flashsalehotel_boxcontent_img_text">
 										<div class="flashsalehotel_img-box">
 											<img class="flashsalehotel_img" width="284px" height="160px"
 												style="object-fit: cover;"
-												src='<c:url value="/assets/web/img/product/${ item.product_image }"/>'
+												src='<c:url value="/assets/web/img/product/${ item.productImage }"/>'
 												"
 										alt="" />
 
 										</div>
 										<div class="flashsalehotel_text">
-											<div class="flashsalehotel_text-title">${ item.product_name }</div>
+											<div class="flashsalehotel_text-title">${ item.productName }</div>
 
 
 											<div class="flashsalehotel_text-time">
-												<i class="fa-solid fa-certificate"></i> ${ item.category_name }
+												<i class="fa-solid fa-certificate"></i> ${ item.category.categoryName }
 											</div>
 											<div class="flashsalehotel_place"></div>
 										</div>

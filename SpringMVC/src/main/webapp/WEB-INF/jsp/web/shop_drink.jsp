@@ -100,44 +100,16 @@
 
 					<div class="category">
 						<div class="category-list">
-
-							@foreach ($dataCategory as $category)
-							<div class="category-item">
-								<input type="checkbox" name="category" class="action"
-									id="category-item-{{ $category->category_id }}"
-									data-category_id="{{ $category->category_id }}"> <label
-									for="category-item-{{ $category->category_id }}">{{
-									$category->category_name }}</label>
-							</div>
-							@endforeach {{--
-							<div class="category-item">
-								<input type="checkbox" name="category" id="category-item-5">
-								<label for="category-item-5">Hi tea</label>
-
-							</div>
-							<div class="category-item">
-								<input type="checkbox" name="category" id="category-item-5">
-								<label for="category-item-5">Hi tea</label>
-
-							</div>
-							<div class="category-item">
-								<input type="checkbox" name="category" id="category-item-5">
-								<label for="category-item-5">Hi tea</label>
-
-							</div>
-							--}}
+							<c:forEach items="${ categories }" var="category">
+								<div class="category-item">
+									<input type="checkbox" name="category" class="action"
+										id="category-item-${category.categoryId}"
+										data-category_id="${category.categoryId}"> <label
+										for="category-item-${category.categoryId}">${category.categoryName}</label>
+								</div>
+							</c:forEach>
 						</div>
 					</div>
-
-
-					<select name="" id="option-category">
-						<option value="">Tất cả</option> @foreach ($dataCategory as
-						$category)
-						<option value="{{ $category->category_id }}">{{
-							$category->category_name }}</option> @endforeach
-
-
-					</select>
 				</div>
 			</div>
 			<div class="col-md-9 all-product rightSidebar">
@@ -493,98 +465,59 @@
 
 
 				</div>
-				{{--
-				<div class="row mt-5">
-					<div class="col-md-12 panigate">{!!
-						$all_product->links('admin.ComponentPages.pagination') !!}</div>
-				</div>
-				--}}
+
 			</div>
 		</div>
 	</div>
 
 
-
-
-
-
-	<?php
-    $recentlyviewed = session()->get('recentlyviewed');
-    ?>
-	@if ($recentlyviewed != null)
-	<div class="recentlyviewed">
-		<div class="recentlyviewed_box">
-			<div class="recentlyviewed_title">
-				<span class="recentlyviewed_title">Xem Gần Đây</span>
-			</div>
-
-			<div class="recentlyviewed_boxcontent-boxslider">
-				<div class="recentlyviewed_boxcontent owl-carousel owl-theme">
-
-					@foreach ($recentlyviewed as $key => $product) <a
-						href="{{ url('/san-pham/san-pham-chi-tiet?product_id=' . $product['product_id'] . '') }}"
-						class="flashsalehotel_boxcontent_hover">
-						<div class="flashsalehotel_boxcontent item">
-							<div class="flashsalehotel_boxcontent_img_text">
-								<div class="flashsalehotel_img-box">
-									<img class="flashsalehotel_img" width="284px" height="160px"
-										style="object-fit: cover;"
-										src="{{ url('public/fontend/assets/img/product/' . $product['product_image'] . '') }}"
-										alt="">
-
-								</div>
-								<div class="flashsalehotel_text">
-									<div class="flashsalehotel_text-title">{{
-										$product['product_name'] }}</div>
-
-
-									<div class="flashsalehotel_text-time">
-										<i class="fa-solid fa-certificate"></i> {{
-										$product['category_name'] }}
-									</div>
-									<div class="flashsalehotel_place">
-										{{--
-										<div>
-											<i class="fa-solid fa-certificate"></i> Danh Mục Sản Phẩm
-										</div>
-										--}}
-									</div>
-									{{--
-									<div class="flashsalehotel_text-box-price">
-										--}} {{--
-										<div class="flashsalehotel_text-box-price-two">
-											<span>874.070đ</span>
-										</div>
-										<div class="flashsalehotel_text-box-price-three bordernhay">
-											<div style="margin-left: 8px;"
-												class="flashsalehotel_text-box-price-three-l chunhay">
-												<div class="cart-hover">
-													<i class="fa-solid fa-heart"></i> <span
-														style="font-size: 14px;">Yêu Thích</span>
-												</div>
-											</div>
-											<div class="flashsalehotel_text-box-price-three-r chunhay">
-												<div class="cart-hover">
-													<i class="fa-solid fa-cart-shopping"></i> <span
-														style="font-size: 14px;">Đặt Hàng</span>
-												</div>
-											</div>
-										</div>
-										--}} {{--
-									</div>
-									--}}
-								</div>
-							</div>
-						</div>
-					</a> @endforeach
-
-
+	<c:if test="${ Until.productReviewList.size() != 0 }">
+		<div class="recentlyviewed">
+			<div class="recentlyviewed_box">
+				<div class="recentlyviewed_title">
+					<span class="recentlyviewed_title">Xem Gần Đây</span>
 				</div>
-			</div>
 
+				<div class="recentlyviewed_boxcontent-boxslider">
+					<div class="recentlyviewed_boxcontent owl-carousel owl-theme">
+
+						<c:forEach items="${ Until.productReviewList }" var="item">
+
+
+							<a
+								href="/san-pham/san-pham-chi-tiet?product_id= ${ item.productId }"
+								class="flashsalehotel_boxcontent_hover">
+								<div class="flashsalehotel_boxcontent item">
+									<div class="flashsalehotel_boxcontent_img_text">
+										<div class="flashsalehotel_img-box">
+											<img class="flashsalehotel_img" width="284px" height="160px"
+												style="object-fit: cover;"
+												src='<c:url value="/assets/web/img/product/${ item.productImage }"/>'
+												"
+										alt="" />
+
+										</div>
+										<div class="flashsalehotel_text">
+											<div class="flashsalehotel_text-title">${ item.productName }</div>
+
+
+											<div class="flashsalehotel_text-time">
+												<i class="fa-solid fa-certificate"></i> ${ item.category.categoryName }
+											</div>
+											<div class="flashsalehotel_place"></div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</c:forEach>
+
+
+					</div>
+				</div>
+
+			</div>
 		</div>
-	</div>
-	@endif
+	</c:if>
 
 	<!-- Optional JavaScript -->
 	<!-- Popper.js first, then Bootstrap JS -->
@@ -615,29 +548,7 @@
                 additionalMarginTop: 80
             });
     </script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js">
-    
-    function getPosts() {
-        $.ajax({
-            url: '/cua-hang/load-danh-sach-san-pham',
-            method: 'get',
-            data: {
-            	
-            },
-            success: function(data) {
-            	
-                $('.all-product .list-product').html(data);
-                $('.list-product').removeClass('loading-1');
-            },
-            error: function() {
-                alert("Bug Huhu :<<");
-            }
-        })
-    }
-    getPosts();
-    </script>
 	<script>
-		/* alert("100") */
         var viewportWidth = $(window).width();
         if (viewportWidth < 1280) {
             $('.hello').removeClass("theiaStickySidebar");
@@ -656,7 +567,6 @@
                 url: '/SpringMVC/cua-hang/load-danh-sach-san-pham',
                 method: 'get',
                 data: {
-                	
                 },
                 success: function(data) {
                     $('.all-product .list-product').html(data);
@@ -669,15 +579,47 @@
         }
         getPosts();
 
+        $(document).on('click', '.cart-hover', function() {
+			$('.modal').addClass('loading_product');
+			var product_id = $(this).data('product_id');
+			/* alert(product_id) */
 
-        /* var price_min = {{ $price_min }};
-        var price_max = {{ $price_max }};
+			$("input[name='size']").click(function() {
+				$('.button_cart').attr('data-dismiss', 'modal');
+			});
 
-        // $(document).ready(function(){
-        $("#slider-range").slider({
+			$.ajax({
+				url : '/SpringMVC/watch-product',
+				method : 'POST',
+				data : {
+					product_id : product_id
+				},
+				success : function(data) {
+					$('.modal .modal-body').html(data);
+					$('.modal .button_cart').attr('data-dismiss', '');
+					$("input[name='size']").click(function() {
+						$('.modal .button_cart').attr('data-dismiss', 'modal');
+					});
+					// $(this).attr('data-target', '#shopping');
+					$('.modal').removeClass('loading_product');
+				},
+				error : function() {
+					alert("Ngu sửa Bug đi con Huhu :<<");
+				}
+			})
+		})
+		
+
+    </script>
+
+	<script type="text/javascript">
+    	var price_min = ${priceMin};
+    	var price_max = ${priceMax};
+    	
+    	$("#slider-range").slider({
             range: true,
-            min: {{ $price_min }},
-            max: {{ $price_max }},
+            min: ${priceMin},
+            max: ${priceMax},
             values: [50, 100000],
             slide: function(event, ui) {
                 $("#amount").val("" + ui.values[0] + "đ" + " - " + ui.values[1] + "đ");
@@ -692,29 +634,104 @@
                     // alert("hih");
                 });
                 $.ajax({
-                    url: '{{ url('/cua-hang/search-san-pham') }}',
-                    method: 'get',
+                    url: '/SpringMVC/cua-hang/search-san-pham?priceMin=' + price_min + "&priceMax=" + price_max + "&text=" + text + "&valueOption=" + value_option + "&typeOption=" + type_option + "&listId=" + list_id,
+                    method: 'GET',
                     data: {
-                        price_min: ui.values[0],
+                       /*  price_min: ui.values[0],
                         price_max: ui.values[1],
                         text: text,
                         value_option: value_option,
                         type_option: type_option,
-                        list_id: list_id
+                        list_id: list_id */
                     },
                     success: function(data) {
                         $('.all-product .list-product').html(data);
 
                     },
                     error: function() {
-                        // alert("Bug Huhu :<<");
+                        alert("Bug Huhu :<<");
                     }
-                })
+                }) 
             }
-        }); */
-        $("#amount").val($("#slider-range").slider("values", 0) + "đ" +
-            " - " + $("#slider-range").slider("values", 1) + "đ");
-        // });
+        });
+    	 $("#amount").val($("#slider-range").slider("values", 0) + "đ" +
+    	            " - " + $("#slider-range").slider("values", 1) + "đ");
+    	 
+    	 //Search
+    	 $('.search-input').keyup(function() {
+             var text = $(this).val();
+             // console.log(text);
+             var value_option = $('#option-filter').val();
+             var type_option = $('#option-filter option:selected').attr('data-type');
+             var list_id = [];
+             $.each($("input[name='category']:checked"), function() {
+                 list_id.push($(this).attr('data-category_id'));
+             });
+             $.ajax({
+                 url: '/SpringMVC/cua-hang/search-san-pham?priceMin=' + price_min + "&priceMax=" + price_max + "&text=" + text + "&valueOption=" + value_option + "&typeOption=" + type_option + "&listId=" + list_id,
+                 method: 'GET',
+                 data: {
+                  
+                 },
+                 success: function(data) {
+                     $('.all-product .list-product').html(data);
+
+                 },
+                 error: function() {
+                     alert("Bug Huhu :<<");
+                 }
+             }) 
+         })
+         
+         // Option filter
+        $('#option-filter').change(function() {
+            var value_option = $(this).val();
+            var type_option = $('#option-filter option:selected').attr('data-type');
+            // alert(value_option + type_option);
+            var list_id = [];
+            $.each($("input[name='category']:checked"), function() {
+                list_id.push($(this).attr('data-category_id'));
+                // alert("hih");
+            });
+            var text = $('.search-input').val();
+            $.ajax({
+                url: '/SpringMVC/cua-hang/search-san-pham?priceMin=' + price_min + "&priceMax=" + price_max + "&text=" + text + "&valueOption=" + value_option + "&typeOption=" + type_option + "&listId=" + list_id,
+                method: 'GET',
+                data: {
+                },
+                success: function(data) {
+                    $('.all-product .list-product').html(data);
+                },
+                error: function() {
+                    alert("Bug Huhu :<<");
+                }
+            }) 
+        })
+        
+        
+        
+        $(".action").on("click", function() {
+            var list_id = [];
+            $.each($("input[name='category']:checked"), function() {
+                list_id.push($(this).attr('data-category_id'));
+            });
+            var text = $('.search-input').val();
+            var value_option = $('#option-filter').val();
+            var type_option = $('#option-filter option:selected').attr('data-type');
+            $.ajax({
+                url: '/SpringMVC/cua-hang/search-san-pham?priceMin=' + price_min + "&priceMax=" + price_max + "&text=" + text + "&valueOption=" + value_option + "&typeOption=" + type_option + "&listId=" + list_id,
+                method: 'GET',
+                data: {
+                },
+                success: function(data) {
+                    $('.all-product .list-product').html(data);
+                },
+                error: function() {
+                    alert("Bug Huhu :<<");
+                }
+            }) 
+        });
+    	 
     </script>
 
 	<script>
@@ -755,97 +772,12 @@
 
 
         // Search 
-        $('.search-input').keyup(function() {
-            var text = $(this).val();
-            // console.log(text);
-            var value_option = $('#option-filter').val();
-            var type_option = $('#option-filter option:selected').attr('data-type');
-            var list_id = [];
-            $.each($("input[name='category']:checked"), function() {
-                list_id.push($(this).attr('data-category_id'));
-                // alert("hih");
-            });
-            $.ajax({
-                url: '{{ url('/cua-hang/search-san-pham') }}',
-                method: 'get',
-                data: {
-                    text: text,
-                    price_min: price_min,
-                    price_max: price_max,
-                    value_option: value_option,
-                    type_option: type_option,
-                    list_id: list_id
-                },
-                success: function(data) {
-                    // $(this).attr('data-target', '#shopping');
-                    $('.all-product .list-product').html(data);
-                },
-                error: function() {
-                    alert("Ngu sửa Bug đi con Huhu :<<");
-                }
-            })
-        })
+        
 
-        // Option filter
-        $('#option-filter').change(function() {
-            var value_option = $(this).val();
-            var type_option = $('#option-filter option:selected').attr('data-type');
-            // alert(value_option + type_option);
-            var list_id = [];
-            $.each($("input[name='category']:checked"), function() {
-                list_id.push($(this).attr('data-category_id'));
-                // alert("hih");
-            });
-            var text = $('.search-input').val();
-            $.ajax({
-                url: '{{ url('/cua-hang/search-san-pham') }}',
-                method: 'get',
-                data: {
-                    text: text,
-                    price_min: price_min,
-                    price_max: price_max,
-                    value_option: value_option,
-                    type_option: type_option,
-                    list_id: list_id
-                },
-                success: function(data) {
-                    // $(this).attr('data-target', '#shopping');
-                    $('.all-product .list-product').html(data);
-                },
-                error: function() {
-                    alert("Ngu sửa Bug đi con Huhu :<<");
-                }
-            })
-        })
+        
 
 
-        $(".action").on("click", function() {
-            var list_id = [];
-            $.each($("input[name='category']:checked"), function() {
-                list_id.push($(this).attr('data-category_id'));
-            });
-            var text = $('.search-input').val();
-            var value_option = $('#option-filter').val();
-            var type_option = $('#option-filter option:selected').attr('data-type');
-            $.ajax({
-                url: '{{ url('/cua-hang/search-san-pham') }}',
-                method: 'get',
-                data: {
-                    list_id: list_id,
-                    text: text,
-                    value_option: value_option,
-                    type_option: type_option,
-                    price_min: price_min,
-                    price_max: price_max,
-                },
-                success: function(data) {
-                    $('.all-product .list-product').html(data);
-                },
-                error: function() {
-                    alert("Bug Huhu :<<");
-                }
-            })
-        });
+        
     </script>
 
 
@@ -866,7 +798,7 @@
 
 
             function micBtnClick() {
-            	alert("huhu")
+            	//alert("huhu")
                 if (micIcon.classList.contains('fa-microphone')) { // start speech
 
                     recognition.start();
@@ -899,32 +831,25 @@
 
             function resultSpeech(event) {
                 const transcript = event.results[0][0].transcript;
-                input_search.value = transcript;
+                const transcriptWithoutPeriod = transcript.replace(/\./g, '');
+                input_search.value = transcriptWithoutPeriod;
                 var list_id = [];
                 $.each($("input[name='category']:checked"), function() {
                     list_id.push($(this).attr('data-category_id'));
-                    // alert("hih");
                 });
-                // alert(list_id);
+                //alert(transcript);
                 var value_option = $('#option-filter').val();
                 var type_option = $('#option-filter option:selected').attr('data-type');
                 $.ajax({
-                    url: '{{ url('/cua-hang/search-san-pham') }}',
-                    method: 'get',
+                    url: '/SpringMVC/cua-hang/search-san-pham?priceMin=' + price_min + "&priceMax=" + price_max + "&text=" + transcriptWithoutPeriod + "&valueOption=" + value_option + "&typeOption=" + type_option + "&listId=" + list_id,
+                    method: 'GET',
                     data: {
-                        text: transcript,
-                        price_min: price_min,
-                        price_max: price_max,
-                        value_option: value_option,
-                        type_option: type_option,
-                        list_id: list_id
                     },
                     success: function(data) {
-                        // $(this).attr('data-target', '#shopping');
                         $('.all-product .list-product').html(data);
                     },
                     error: function() {
-                        alert("Ngu sửa Bug đi con Huhu :<<");
+                        alert("Bug Huhu :<<");
                     }
                 })
             }
@@ -932,8 +857,6 @@
             console.log("Your Broswer not supports");
         }
     </script>
-
-	{{-- Thêm vào giỏ hàng --}}
 	<script>
         // $(document).on("click", '.button_cart', function() {
         //     var product_id = $("#product_id").val();
@@ -973,6 +896,4 @@
         //     }
         // });
     </script>
-
-
 </body>

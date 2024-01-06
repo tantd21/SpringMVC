@@ -406,11 +406,12 @@ img {
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
+  font-size: 15px;
 }
 
 .sale-hoadon .code-sale .coupon-apply {
   width: 80%;
-  height: 40px;
+  height: auto;	
   border: 1px solid #ff3c00;
   margin: 10px auto;
   color: #ff000d;

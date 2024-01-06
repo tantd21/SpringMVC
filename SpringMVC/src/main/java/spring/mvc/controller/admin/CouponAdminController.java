@@ -1,11 +1,8 @@
 package spring.mvc.controller.admin;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,52 +13,58 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.mvc.entity.CouponJPA;
-import spring.mvc.service.admin.ImpCouponJPAService;
+import spring.mvc.service.admin.CouponJPAService;
 
 @Controller
-@RequestMapping("/admin/coupons")
+@RequestMapping(value = "/admin/coupons")
 public class CouponAdminController {
 	@Autowired
-	ImpCouponJPAService impCouponJPAService;
+	CouponJPAService couponJPAService;
 	
 	@RequestMapping(value = "")
-	public ModelAndView viewCoupons(@RequestParam("p") Optional<Integer> p) {
+	public ModelAndView viewListCoupon() {
 		ModelAndView mav = new ModelAndView("/admin/coupons/list_coupons");
-		mav.addObject("coupons", impCouponJPAService.getAllCoupons(p));
+		mav.addObject("coupons", couponJPAService.getAllCouponJPAs());
 		return mav;
 	}
 	
-	@RequestMapping("/add-coupon")
+	@RequestMapping(value = "/add-coupon")
 	public ModelAndView viewAddCoupon() {
-		return new ModelAndView("/admin/coupons/add_coupon");
-	}
+		ModelAndView mav = new ModelAndView("/admin/coupons/add_coupon");
+		return mav;
+ 	}
 	
-	@RequestMapping("/edit-coupon")
-	public ModelAndView viewEditCoupon(@RequestParam("couponId") Long cateLong) {
+	@RequestMapping(value = "/edit-coupon")
+	public ModelAndView viewEditCoupon(@RequestParam("couponId") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/coupons/edit_coupon");
-		mav.addObject("coupon", impCouponJPAService.findCouponById(cateLong));
+		mav.addObject("coupon", couponJPAService.getCouponJPAById(id));
 		return mav;
 	}
 	
-	@PostMapping("/save-coupon")
-	public String saveCoupon(@ModelAttribute("coupon") CouponJPA couponJPA) {
-		System.out.println("hahaha");
-		impCouponJPAService.saveCoupon(couponJPA);
-		return "redirect:/admin/coupons";
+	@PostMapping(value = "/update-coupon")
+	public String updateCoupon(@ModelAttribute("coupon") CouponJPA coupon, HttpServletRequest request) {
+		if(couponJPAService.saveCoupon(coupon)) {
+			return "redirect:/admin/coupons";			
+		}else {
+			String referer = request.getHeader("Referer");
+	        return "redirect:" + referer;
+		}
 	}
 	
-	@PostMapping("/update-coupon")
-	public String updateCoupon(@ModelAttribute("coupon") CouponJPA couponJPA) {
-		System.out.println("hahaha");
-		impCouponJPAService.updateCoupon(couponJPA);
-		return "redirect:/admin/coupons";
+	@PostMapping(value = "/save-coupon")
+	public String saveCoupon(@ModelAttribute("coupon") CouponJPA coupon, HttpServletRequest request) {
+		if(couponJPAService.saveCoupon(coupon)) {
+			return "redirect:/admin/coupons";			
+		}else {
+			String referer = request.getHeader("Referer");
+	        return "redirect:" + referer;
+		}
 	}
 	
-	@DeleteMapping("/delete-coupon")
+	@DeleteMapping(value = "/delete-coupon")
 	@ResponseBody
-	public String deleteCoupon(@RequestParam("delete-id") Long deleteLong) {
-		impCouponJPAService.deletedCouponJPA(deleteLong);
-		return "Thành Công";	
+	public String deleteCoupon(@RequestParam("deleteId") Long deletedId) {
+		couponJPAService.deleteCoupon(deletedId);
+		return "Thành công";
 	}
-	
 }

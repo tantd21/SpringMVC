@@ -10,41 +10,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.mvc.Until.Until;
+import spring.mvc.entity.ProductJPA;
+import spring.mvc.entity.ProductTypeJPA;
 import spring.mvc.model.Flashsale;
 import spring.mvc.model.GalleryProduct;
 import spring.mvc.model.Product;
 import spring.mvc.model.ProductType;
+import spring.mvc.service.user.ImpDetailProductService;
 import spring.mvc.service.user.DetailProductService;
-import spring.mvc.service.user.InterDetailProductService;
+import spring.mvc.service.user.HomeService;
 
 @Controller
 @RequestMapping("/cua-hang/san-pham")
 public class ProductController {
 	@Autowired
-	InterDetailProductService interDetailProductService;
+	DetailProductService interDetailProductService;
+	@Autowired
+	HomeService inneHomeService;
 
 	@RequestMapping(value = "/san-pham-chi-tiet")
-	public ModelAndView detailProduct(@RequestParam("product_id") int product_id) {
-		Product product = new Product();
-		List<Product> productCategorys = new ArrayList<>();
-//		List<Flashsale> flashsaleCategorys = new ArrayList<>();
-//		Flashsale flashsale = new Flashsale();
-		List<ProductType> productTypes = new ArrayList<>();
+	public ModelAndView detailProduct(@RequestParam("product_id") Long product_id) {
+		ProductJPA product = inneHomeService.getProductById(product_id);
+		List<ProductJPA> productCategorys = new ArrayList<>();
+		List<ProductTypeJPA> productTypes = new ArrayList<>();
 		ModelAndView maView = new ModelAndView("/web/san_pham_chi_tiet");
-		for (Product itemProduct : Until.products) {
-			if (itemProduct.getProduct_id() == product_id) {
-				product = itemProduct;
-			}
-		}
-		productCategorys = interDetailProductService.getDataProductCategoryList(product.getCategory_id());
+		productCategorys = interDetailProductService.getDataProductCategoryList(product.getCategory().getCategoryId());
 		for(int i = 0; i < productCategorys.size(); i++) {
-			if(productCategorys.get(i).getProduct_id() == product_id) {
+			if(productCategorys.get(i).getProductId() == product_id) {
 				productCategorys.remove(i);
 			}
 		}
 		int temp = 0;
-		for (Product itemProduct : Until.productReviewList) {
-			if (itemProduct.getProduct_id() == product_id) {
+		for (ProductJPA itemProduct : Until.productReviewList) {
+			if (itemProduct.getProductId() == product_id) {
 				temp = 	1;
 				break;
 			}
@@ -58,9 +56,7 @@ public class ProductController {
 		if (temp != 1) {
 			Until.productReviewList.add(product);
 		}
-
-		maView.addObject("product", product);
-//		maView.addObject("flashsale", flashsale);	
+		maView.addObject("product", product);	
 		maView.addObject("productTypes", productTypes);
 		maView.addObject("galleryProducts", interDetailProductService.getDataGalleryProducts(product_id));
 		maView.addObject("productCategory", productCategorys);

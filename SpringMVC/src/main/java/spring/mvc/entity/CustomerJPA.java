@@ -1,17 +1,9 @@
 package spring.mvc.entity;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_customers")
@@ -34,10 +26,34 @@ public class CustomerJPA {
 	private String customerPassword;
 
 	@Column(name = "customer_status")
-	private String customerStatus;
+	private int customerStatus;
 
 	@Column(name = "order_boom")
 	private String orderBoom;
+
+	@Column(name = "total_order")
+	private Integer totalOrder;
+
+	@Column(name = "created_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdAt;
+
+	@Column(name = "updated_at")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedAt;
+
+	@PrePersist
+	protected void onCreate() {
+		createdAt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = new Date();
+	}
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<OrderJPA> orders;
 
 	public Long getCustomerId() {
 		return customerId;
@@ -79,11 +95,11 @@ public class CustomerJPA {
 		this.customerPassword = customerPassword;
 	}
 
-	public String getCustomerStatus() {
+	public int getCustomerStatus() {
 		return customerStatus;
 	}
 
-	public void setCustomerStatus(String customerStatus) {
+	public void setCustomerStatus(int customerStatus) {
 		this.customerStatus = customerStatus;
 	}
 
@@ -95,11 +111,11 @@ public class CustomerJPA {
 		this.orderBoom = orderBoom;
 	}
 
-	public String getTotalOrder() {
+	public Integer getTotalOrder() {
 		return totalOrder;
 	}
 
-	public void setTotalOrder(String totalOrder) {
+	public void setTotalOrder(Integer totalOrder) {
 		this.totalOrder = totalOrder;
 	}
 
@@ -118,17 +134,4 @@ public class CustomerJPA {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-	@Column(name = "total_order")
-	private String totalOrder;
-	@Column(name = "created_at", nullable = true)
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
-
-	@Column(name = "updated_at", nullable = true)
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
-
 }

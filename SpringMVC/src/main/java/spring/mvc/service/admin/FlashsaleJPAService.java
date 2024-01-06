@@ -33,7 +33,7 @@ public class FlashsaleJPAService implements ImpFlashsaleJPAService {
 	public boolean saveFlashsale(FlashsaleJPA flashsale, Long productId) {
 		ProductJPA productJPA = productJPARepository.findOne(productId);
 		flashsale.setProduct(productJPA);
-
+		productJPA.setFlashsaleStatus(1);
 		if (flashsale.getFlashsaleCondition() == 0) {
 			if (flashsale.getFlashsalePercent() > 100) {
 				return false;
@@ -41,11 +41,12 @@ public class FlashsaleJPAService implements ImpFlashsaleJPAService {
 			double percentDescrease = (flashsale.getFlashsalePercent() * productJPA.getProductPrice()) / 100;
 			flashsale.setFlashsalePriceSale(productJPA.getProductPrice() - percentDescrease);
 		} else {
-			if(flashsale.getFlashsalePercent() < 1000) {
+			if (flashsale.getFlashsalePercent() < 1000) {
 				return false;
 			}
 			flashsale.setFlashsalePriceSale(productJPA.getProductPrice() - flashsale.getFlashsalePercent());
 		}
+		productJPARepository.save(productJPA);	
 		flashsaleJPARepository.save(flashsale);
 		return true;
 	}
@@ -62,7 +63,7 @@ public class FlashsaleJPAService implements ImpFlashsaleJPAService {
 			double percentDescrease = (flashsale.getFlashsalePercent() * productPrice) / 100;
 			flashsale.setFlashsalePriceSale(productPrice - percentDescrease);
 		} else {
-			if(flashsale.getFlashsalePercent() < 1000) {
+			if (flashsale.getFlashsalePercent() < 1000) {
 				return false;
 			}
 			flashsale.setFlashsalePriceSale(productPrice - flashsale.getFlashsalePercent());
@@ -70,11 +71,19 @@ public class FlashsaleJPAService implements ImpFlashsaleJPAService {
 		flashsaleJPARepository.save(flashsale);
 		return true;
 	}
-	
+
 	@Override
 	public FlashsaleJPA findFlashsaleById(Long flashsaleId) {
 		// TODO Auto-generated method stub
 		return flashsaleJPARepository.findFlashsaleById(flashsaleId);
+	}
+	
+	@Override
+	public boolean deleteFlashsale(Long flashsaleId, Long productId) {
+		flashsaleJPARepository.deleteFlashsalebyId(flashsaleId);
+		ProductJPA product = productJPARepository.findProductById(productId);
+		product.setFlashsaleStatus(0);
+		return true;
 	}
 
 }

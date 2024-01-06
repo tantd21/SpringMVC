@@ -38,7 +38,7 @@ import spring.mvc.model.Product;
 import spring.mvc.service.admin.ImpCategoryJPAService;
 import spring.mvc.service.admin.ImpProductService;
 import spring.mvc.service.admin.ProductService;
-import spring.mvc.service.user.DetailProductService;
+import spring.mvc.service.user.ImpDetailProductService;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -53,11 +53,7 @@ public class ProductAdminController {
 		PageRequest pageRequest = new PageRequest(p.orElse(0), 6);
 		Pageable pageable = pageRequest;
 		Page<ProductJPA> page = productService.getAllProductJPAs(pageable);
-//		List<ProductJPA> productJPAs =  productService.getAllProductJPAs();
 		List<CategoryJPA> categoryJPAs = impCategoryJPAService.getAllCategoryJPAs();
-		for (CategoryJPA categoryJPA : categoryJPAs) {
-			System.out.println(categoryJPA.getProducts().size());
-		}
 		model.addAttribute("categorys", categoryJPAs);
 		model.addAttribute("products", page);
 		return "/admin/products/list_products";
@@ -159,6 +155,12 @@ public class ProductAdminController {
 		}else {
 			return "error";
 		}
+	}
+	
+	@RequestMapping(value = "/un-active-product")
+	@ResponseBody
+	public String unActiveProductString(@RequestParam("productId") Long productId, @RequestParam("status") int status) {
+		return productService.unActiveProduct(productId, status);
 	}
 	
 	@PostMapping(value = "/update-gallery-content")

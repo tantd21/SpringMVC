@@ -1,18 +1,12 @@
 package spring.mvc.entity;
 
-
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -22,19 +16,11 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "tbl_coupon")
 public class CouponJPA {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "coupon_id")
 	private Long couponId;
 
-//	@Column(name = "product_id")
-//	private Long productId;
-
-//	@OneToOne
-//	@JoinColumn(name = "product_id")
-//	private ProductJPA product;
-	
 	@Column(name = "coupon_name")
 	private String couponName;
 
@@ -45,35 +31,37 @@ public class CouponJPA {
 	private String couponDesc;
 
 	@Column(name = "coupon_qty_code")
-	private int couponQty;
-	
+	private double couponQtyCode;
+
+	@Column(name = "coupon_condition")
+	private double couponCondition;
+
 	@Column(name = "coupon_price_sale")
-	private int couponPrice;
+	private double couponPriceSale;
 
 	@Column(name = "coupon_date_start")
-	private String couponStart;
+	private String couponDateStart;
 
 	@Column(name = "coupon_date_end")
-	private String couponEnd;
-
-	@Column(name = "created_at")
+	private String couponDateEnd;
+	
+	@Column(name = "created_at", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
-	@Column(name = "updated_at")
+	@Column(name = "updated_at", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
-
-	@Column(name = "deleted_at")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date deletedAt;
 
 	@PrePersist
 	protected void onCreate() {
 		createdAt = new Date();
 	}
-	
 
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = new Date();
+	}
 
 	public Long getCouponId() {
 		return couponId;
@@ -107,36 +95,44 @@ public class CouponJPA {
 		this.couponDesc = couponDesc;
 	}
 
-	public int getCouponQty() {
-		return couponQty;
+	public double getCouponQtyCode() {
+		return couponQtyCode;
 	}
 
-	public void setCouponQty(int couponQty) {
-		this.couponQty = couponQty;
+	public void setCouponQtyCode(double couponQtyCode) {
+		this.couponQtyCode = couponQtyCode;
 	}
 
-	public int getCouponPrice() {
-		return couponPrice;
+	public double getCouponCondition() {
+		return couponCondition;
 	}
 
-	public void setCouponPrice(int couponPrice) {
-		this.couponPrice = couponPrice;
+	public void setCouponCondition(double couponCondition) {
+		this.couponCondition = couponCondition;
 	}
 
-	public String getCouponStart() {
-		return couponStart;
+	public double getCouponPriceSale() {
+		return couponPriceSale;
 	}
 
-	public void setCouponStart(String couponStart) {
-		this.couponStart = couponStart;
+	public void setCouponPriceSale(double couponPriceSale) {
+		this.couponPriceSale = couponPriceSale;
 	}
 
-	public String getCouponEnd() {
-		return couponEnd;
+	public String getCouponDateStart() {
+		return couponDateStart;
 	}
 
-	public void setCouponEnd(String couponEnd) {
-		this.couponEnd = couponEnd;
+	public void setCouponDateStart(String couponDateStart) {
+		this.couponDateStart = couponDateStart;
+	}
+
+	public String getCouponDateEnd() {
+		return couponDateEnd;
+	}
+
+	public void setCouponDateEnd(String couponDateEnd) {
+		this.couponDateEnd = couponDateEnd;
 	}
 
 	public Date getCreatedAt() {
@@ -154,28 +150,4 @@ public class CouponJPA {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-	public Date getDeletedAt() {
-		return deletedAt;
-	}
-
-	public void setDeletedAt(Date deletedAt) {
-		this.deletedAt = deletedAt;
-	}
-
-	@PreUpdate
-	protected void onUpdate() {
-		updatedAt = new Date();
-	}
-	
-//	public ProductJPA getProduct() {
-//		return product;
-//	}
-//
-//	public void setProduct(ProductJPA product) {
-//		this.product = product;
-//	}
-
-
-	
 }

@@ -30,13 +30,32 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
 	integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-{{-- Toastr Css --}}
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+<script type="text/javascript">
+	function message_toastr(type, content) {
+		Command: toastr[type](content)
+		toastr.options = {
+			"closeButton" : true,
+			"debug" : true,
+			"newestOnTop" : false,
+			"progressBar" : true,
+			"positionClass" : "toast-top-right",
+			"preventDuplicates" : true,
+			"showDuration" : "300",
+			"hideDuration" : "1000",
+			"timeOut" : "5000",
+			"extendedTimeOut" : "1000",
+			"showEasing" : "swing",
+			"hideEasing" : "linear",
+			"showMethod" : "fadeIn",
+			"hideMethod" : "fadeOut"
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="container-scroller">
@@ -54,7 +73,6 @@
 					<decorator:body></decorator:body>
 
 				</div>
-
 				<!-- footer -->
 
 				<%@include file="/WEB-INF/jsp/layout/admin/footer.jsp"%>
@@ -98,5 +116,26 @@
 		/* alert(100) */
 	</script>
 
+	<script>
+		function message_toastr(type, content) {
+			Command: toastr[type](content)
+			toastr.options = {
+				"closeButton" : true,
+				"debug" : true,
+				"newestOnTop" : false,
+				"progressBar" : true,
+				"positionClass" : "toast-top-right",
+				"preventDuplicates" : true,
+				"showDuration" : "300",
+				"hideDuration" : "1000",
+				"timeOut" : "5000",
+				"extendedTimeOut" : "1000",
+				"showEasing" : "swing",
+				"hideEasing" : "linear",
+				"showMethod" : "fadeIn",
+				"hideMethod" : "fadeOut"
+			}
+		}
+	</script>
 </body>
 </html>

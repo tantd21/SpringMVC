@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/WEB-INF/jsp/layout">
+	<decorator name="403" page="access-denied.jsp">
+		<pattern>/denied</pattern>
+	</decorator>
 	<decorator name="admin" page="admin/admin.jsp">
 		<pattern>/admin/*</pattern>
+	</decorator>
+	<decorator name="auth" page="login-admin.jsp">
+		<pattern>/auth/*</pattern>
 	</decorator>
 	<decorator name="web" page="web/user.jsp">
 		<pattern>/*</pattern>

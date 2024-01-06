@@ -41,4 +41,8 @@
 	</bean>
 	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
 
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="12"></constructor-arg>
+	</bean>
 </beans>

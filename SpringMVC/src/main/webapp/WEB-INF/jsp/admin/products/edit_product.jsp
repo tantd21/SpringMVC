@@ -36,7 +36,7 @@
 					</div>
 					<div class="form-group">
 						<label for="">Product Category</label> <select
-							class="form-control" name="category_id">
+							class="form-control" name="categoryId">
 							<!-- @foreach
 							($data_category as $key => $dataCategory) @if
 							($dataCategory->category_id == $product_old->category_id) -->

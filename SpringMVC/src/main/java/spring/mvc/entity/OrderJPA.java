@@ -3,59 +3,87 @@ package spring.mvc.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_order")
 public class OrderJPA {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "order_id")
+	private Long orderId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private Long orderId;
+//	@Column(name = "customer_id")
+//	private Long customerId;
+	
+	@ManyToOne	
+	@JoinColumn(name = "customer_id")
+	private CustomerJPA customer;
+//	@Column(name = "shipping_id")
+//	private Long shippingId;
+	
+	@OneToOne
+	@JoinColumn(name = "shipping_id")
+	private ShippingJPA shipping;
+	
+	@OneToOne
+	@JoinColumn(name = "payment_id")
+	private PaymentJPA payment;
 
-    @Column(name = "customer_id")
-    private Long customerId;
+//	@Column(name = "payment_id")
+//	private Long paymentId;
 
-    @Column(name = "shipping_id")
-    private Long shippingId;
+	@Column(name = "order_status")
+	private int orderStatus;
 
-    @Column(name = "payment_id")
-    private Long paymentId;
+	@Column(name = "order_code")
+	private String orderCode;
 
-    @Column(name = "order_status")
-    private Long orderStatus;
+	@Column(name = "product_coupon")
+	private String productCoupon;
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<OrderDetailJPA> orderDetails;
 
-    @Column(name = "order_code")
-    private String orderCode;
+	@Column(name = "coupon_sale")
+	private double couponSale;
 
-    @Column(name = "product_coupon")
-    private String productCoupon;
+	@Column(name = "product_fee")
+	private double productFee;
 
-    @Column(name = "coupon_sale")
-    private Long couponSale;
+	@Column(name = "total_price")
+	private double totalPrice;
 
-    @Column(name = "product_fee")
-    private String productFee;
+	@Column(name = "total_quantity")
+	private int totalQuantity;
 
-    @Column(name = "total_price")
-    private Long totalPrice;
+	@Column(name = "order_date", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date orderDate;
 
-    @Column(name = "total_quantity")
-    private Integer totalQuantity;
+	@Column(name = "created_at", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdAt;
 
-    public Long getOrderId() {
+	@Column(name = "updated_at", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedAt;
+
+	@Column(name = "deleted_at", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date deletedAt;
+
+	@PrePersist
+	protected void onCreate() {
+		createdAt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		updatedAt = new Date();
+	}
+
+	public Long getOrderId() {
 		return orderId;
 	}
 
@@ -63,35 +91,43 @@ public class OrderJPA {
 		this.orderId = orderId;
 	}
 
-	public Long getCustomerId() {
-		return customerId;
+	public CustomerJPA getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public void setCustomer(CustomerJPA customer) {
+		this.customer = customer;
 	}
 
-	public Long getShippingId() {
-		return shippingId;
+	public List<OrderDetailJPA> getOrderDetails() {
+		return orderDetails;
 	}
 
-	public void setShippingId(Long shippingId) {
-		this.shippingId = shippingId;
+	public void setOrderDetails(List<OrderDetailJPA> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
-	public Long getPaymentId() {
-		return paymentId;
+	public ShippingJPA getShipping() {
+		return shipping;
 	}
 
-	public void setPaymentId(Long paymentId) {
-		this.paymentId = paymentId;
+	public void setShipping(ShippingJPA shipping) {
+		this.shipping = shipping;
 	}
 
-	public Long getOrderStatus() {
+	public PaymentJPA getPayment() {
+		return payment;
+	}
+
+	public void setPayment(PaymentJPA payment) {
+		this.payment = payment;
+	}
+
+	public int getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(Long orderStatus) {
+	public void setOrderStatus(int orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
@@ -111,43 +147,43 @@ public class OrderJPA {
 		this.productCoupon = productCoupon;
 	}
 
-	public Long getCouponSale() {
+	public double getCouponSale() {
 		return couponSale;
 	}
 
-	public void setCouponSale(Long couponSale) {
+	public void setCouponSale(double couponSale) {
 		this.couponSale = couponSale;
 	}
 
-	public String getProductFee() {
+	public double getProductFee() {
 		return productFee;
 	}
 
-	public void setProductFee(String productFee) {
+	public void setProductFee(double productFee) {
 		this.productFee = productFee;
 	}
 
-	public Long getTotalPrice() {
+	public double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(Long totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public Integer getTotalQuantity() {
+	public int getTotalQuantity() {
 		return totalQuantity;
 	}
 
-	public void setTotalQuantity(Integer totalQuantity) {
+	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public String getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -174,23 +210,5 @@ public class OrderJPA {
 	public void setDeletedAt(Date deletedAt) {
 		this.deletedAt = deletedAt;
 	}
-
-	@Column(name = "order_date")
-    private String orderDate;
-    
-    @Column(name = "created_at")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
-
-	@Column(name = "updated_at")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date updatedAt;
-
-	@Column(name = "deleted_at")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date deletedAt;
-
-    // Constructors, getters, and setters
-
-    // You can add additional methods as needed
+	
 }

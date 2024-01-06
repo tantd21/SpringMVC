@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="spring.mvc.Until.Until"%>
-<%
-// Tạo một đối tượng Until
-int price = 1000; // Số bạn muốn định dạng
-String formattedPrice = Until.convertNumber(price); // Gọi method và lưu kết quả vào biến
-%>
+
 <body>
 	<div class="slider">
 		<div class="slider-box">
@@ -15,12 +11,10 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 					<div class="item">
 						<img width="465px" height="195px"
 							style="object-fit: cover; border-radius: 8px;"
-							src='<c:url value="/assets/web/img/slider/${slider.slider_image}"/>'
-							alt="${ slider.slider_name }" />
+							src='<c:url value="/assets/web/img/slider/${slider.sliderImage}"/>'
+							alt="${ slider.sliderName }" />
 					</div>
 				</c:forEach>
-
-
 			</div>
 		</div>
 	</div>
@@ -51,7 +45,7 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 					</div>
 					<div class="boxcontent-text">
 						<div class="boxcontent-text-one">${config.config_title}</div>
-						<div class="boxcontent-text-two">${config.config_content}${ Until.productReviewList.size() }
+						<div class="boxcontent-text-two">${config.config_content}${ cart.size() }
 						</div>
 					</div>
 				</div>
@@ -98,21 +92,21 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 						<div class="flashsalehotel_boxcontent_img_text">
 							<div class="flashsalehotel_img-box">
 								<a
-									href="/SpringMVC/cua-hang/san-pham/san-pham-chi-tiet?product_id=${ flashsale.product.product_id }"
+									href="/SpringMVC/cua-hang/san-pham/san-pham-chi-tiet?product_id=${ flashsale.product.productId }"
 									class="flashsalehotel_boxcontent_hover"> <img
 									class="flashsalehotel_img" width="284px" height="160px"
 									style="object-fit: cover;"
-									src='<c:url value="/assets/web/img/product/${ flashsale.product.product_image }"/>'
+									src='<c:url value="/assets/web/img/product/${ flashsale.product.productImage }"/>'
 									alt="" />
 
 								</a>
 							</div>
 							<div class="flashsalehotel_text">
-								<div class="flashsalehotel_text-title">${ flashsale.product.product_name }</div>
+								<div class="flashsalehotel_text-title">${ flashsale.product.productName }</div>
 								<div class="flashsalehotel_place">
 									<div>
 										<i class="fa-solid fa-certificate"></i>
-										${flashsale.product.category_name}
+										${flashsale.product.category.categoryName}
 									</div>
 								</div>
 
@@ -120,13 +114,13 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 								<div class="flashsalehotel_text-box-price">
 									<div style="display: flex;">
 										<div class="flashsalehotel_text-box-price-two">
-											<span>${ Until.convertNumber(flashsale.flashsale_price_sale) }đ</span>
+											<span>${ Until.convertNumber(flashsale.flashsalePriceSale) }đ</span>
 										</div>
 										<div class="flashsalehotel_text-box-price-one">
 											<span>/</span>
 										</div>
 										<div class="flashsalehotel_text-box-price-one">
-											<span style="text-decoration: line-through">${ Until.convertNumber(flashsale.product.product_price) }đ</span>
+											<span style="text-decoration: line-through">${ Until.convertNumber(flashsale.product.productPrice) }đ</span>
 										</div>
 									</div>
 									<div class="flashsalehotel_text-box-price-three bordernhay">
@@ -140,7 +134,7 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 										<div class="flashsalehotel_text-box-price-three-r chunhay">
 											<div class="cart-hover" data-toggle="modal"
 												data-target="#shopping"
-												data-product_id="${ flashsale.product.product_id }">
+												data-product_id="${ flashsale.product.productId }">
 												<i class="fa-solid fa-cart-shopping"></i> <span
 													style="font-size: 14px;">Đặt Hàng</span>
 											</div>
@@ -177,12 +171,12 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 								<span>Nhập mã </span>
 							</div>
 							<div class="hottelcodesale_box-content-left-content1-block">
-								<span>${ coupon.coupon_name }</span>
+								<span>${ coupon.couponName }</span>
 							</div>
 						</div>
 						<div class="hottelcodesale_box-content-left-content2">
 							<div class="hottelcodesale_box-content-left-content2-l">
-								<span>${ coupon.coupon_desc }</span>
+								<span>${ coupon.couponDesc }</span>
 							</div>
 							<div class="hottelcodesale_box-content-left-content2-r">
 								<span class="hottelcodesale_box-content-left-content2-r">Điều
@@ -191,7 +185,7 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 						</div>
 						<div class="hottelcodesale_box-content-left-content3">
 							<span class="hottelcodesale_box-content-left-content3">Từ
-								Ngày ${ coupon.coupon_date_start } đến ${ coupon.coupon_date_end }
+								Ngày ${ coupon.couponDateStart } đến ${ coupon.couponDateEnd }
 								| Nhập mã trước khi thanh toán</span>
 						</div>
 					</div>
@@ -328,10 +322,6 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 
 					<a href="/SpringMVC/cua-hang" class="btn-all-product">See more</a>
 				</div>
-			<!-- 	<div class="button-dang-nhap">
-
-					<a href="/SpringMVC/dang-nhap" class="btn-all-product">đăng nhập</a>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -351,24 +341,24 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 
 						<c:forEach items="${ Until.productReviewList }" var="item">
 							<a
-								href="/cua-hang/san-pham/san-pham-chi-tiet?product_id= ${ item.product_id }"
+								href="/cua-hang/san-pham/san-pham-chi-tiet?product_id= ${ item.productId }"
 								class="flashsalehotel_boxcontent_hover">
 								<div class="flashsalehotel_boxcontent item">
 									<div class="flashsalehotel_boxcontent_img_text">
 										<div class="flashsalehotel_img-box">
 											<img class="flashsalehotel_img" width="284px" height="160px"
 												style="object-fit: cover;"
-												src='<c:url value="/assets/web/img/product/${ item.product_image }"/>'
+												src='<c:url value="/assets/web/img/product/${ item.productImage }"/>'
 												"
 										alt="" />
 
 										</div>
 										<div class="flashsalehotel_text">
-											<div class="flashsalehotel_text-title">${ item.product_name }</div>
+											<div class="flashsalehotel_text-title">${ item.productName }</div>
 
 
 											<div class="flashsalehotel_text-time">
-												<i class="fa-solid fa-certificate"></i> ${ item.category_name }
+												<i class="fa-solid fa-certificate"></i> ${ item.category.categoryName }
 											</div>
 											<div class="flashsalehotel_place">
 												<!-- {{--
@@ -523,7 +513,7 @@ String formattedPrice = Until.convertNumber(price); // Gọi method và lưu k�
 			});
 
 			$.ajax({
-				url : '/SpringMVC/watch-product',
+				url : '/SpringMVC/watch-product?product_id=' + product_id,
 				method : 'POST',
 				data : {
 					product_id : product_id

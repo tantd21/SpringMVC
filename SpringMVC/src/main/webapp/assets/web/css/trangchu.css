@@ -230,11 +230,12 @@ li {
 
 /*--------------------------------------------------------------------*/
 .fromlogin {
-  position: absolute;
+  position: fixed;
   z-index: 996;
   width: 420px;
   height: 516px;
-  top: 90%;
+  top: 20%;
+  padding-top:20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffffff;
@@ -425,10 +426,11 @@ li {
 
 /*--------------------------------------------------------------------*/
 .fromsignup {
-  position: absolute;
+  position: fixed;
   z-index: 996;
   width: 420px;
   height: 600px;
+  padding-top:20px;
   overflow-y: scroll;
   top: 14%;
   left: 50%;

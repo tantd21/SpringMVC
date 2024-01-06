@@ -54,22 +54,19 @@ public class ProductJPA {
 
 	@Column(name = "product_view", nullable = true)
 	private int productView;
-	
+
 	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
 	private FlashsaleJPA flashsale;
 
 	@Column(name = "created_at", nullable = true)
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
 	@Column(name = "updated_at", nullable = true)
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedAt;
 
 	@Column(name = "deleted_at", nullable = true)
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date deletedAt;
 
@@ -87,9 +84,19 @@ public class ProductJPA {
 	@JoinColumn(name = "category_id")
 	private CategoryJPA category;
 
-
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<GalleryProductJPA> galleryProducts;
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<OrderDetailJPA> orderDetails;
+
+	public List<OrderDetailJPA> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetailJPA> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 
 	public FlashsaleJPA getFlashsale() {
 		return flashsale;
@@ -114,8 +121,6 @@ public class ProductJPA {
 	public void setCategory(CategoryJPA category) {
 		this.category = category;
 	}
-	
-
 
 	public Long getProductId() {
 		return productId;

@@ -27,7 +27,7 @@
 				<s:form action="/SpringMVC/admin/products/flashsales/update-flashsale"
 					modelAttribute="flashsale" method="post">
 					<input type="hidden" name="flashsaleId"
-						value="${ flashsale.flashsaleid }">
+						value="${ flashsale.flashsaleId }">
 					<input type="hidden" name="productId"
 						value="${ flashsale.product.productId }">
 					<input type="hidden" name="productPrice"
@@ -40,7 +40,7 @@
 						<label for="">Loại Giảm Giá</label> <select class="form-control"
 							name="flashsaleCondition">
 							<c:choose>
-								<c:when test="${ flashsale.flashsaleCondition }">
+								<c:when test="${ flashsale.flashsaleCondition == 0}">
 									<option selected value="0">Giảm Giá Theo %</option>
 									<option value="1">Giảm Giá Theo Số Tiền</option>
 								</c:when>

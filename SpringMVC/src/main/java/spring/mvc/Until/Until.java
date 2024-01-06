@@ -1,5 +1,6 @@
 package spring.mvc.Until;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
@@ -7,6 +8,9 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
+import spring.mvc.entity.FlashsaleJPA;
+import spring.mvc.entity.ProductJPA;
+import spring.mvc.entity.ProductTypeJPA;
 import spring.mvc.model.Flashsale;
 import spring.mvc.model.Product;
 import spring.mvc.model.ProductType;
@@ -25,26 +29,32 @@ public class Until {
         return formattedNumber;
 	}
 	
-	public static String generateMD5(String input) {
+	public static String convertMD5(String password) {
+		MessageDigest digest = null;
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(input.getBytes());
-            byte[] digest = md.digest();
-
-            // Chuyển byte array thành chuỗi hex
-            StringBuilder sb = new StringBuilder();
-            for (byte b : digest) {
-                sb.append(String.format("%02x", b & 0xff));
-            }
-            return sb.toString();
+            digest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return null;
         }
-    }
+
+        // Chuyển chuỗi thành mảng bytes
+        byte[] encodedhash = digest.digest(password.getBytes());
+
+        // Chuyển mảng bytes thành chuỗi hex
+        StringBuilder hexString = new StringBuilder(2 * encodedhash.length);
+        for (byte b : encodedhash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        System.out.println("MD5 Hash: " + hexString.toString());
+		return hexString.toString();
+	}
 	
-	public static List<Product> products = new ArrayList<>();
-	public static List<Flashsale> flashsales = new ArrayList<>();
-	public static List<Product> productReviewList = new ArrayList<>();
-	public static List<ProductType> productTypes = new ArrayList<>();
+	public static List<ProductJPA> products = new ArrayList<>();
+	public static List<FlashsaleJPA> flashsales = new ArrayList<>();
+	public static List<ProductJPA> productReviewList = new ArrayList<>();
+	public static List<ProductTypeJPA> productTypes = new ArrayList<>();
 }

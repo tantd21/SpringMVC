@@ -24,9 +24,6 @@ public class FlashsaleJPA {
 	@Column(name = "flashsale_id")
 	private Long flashsaleId;
 
-//	@Column(name = "product_id")
-//	private Long productId;
-
 	@OneToOne
 	@JoinColumn(name = "product_id")
 	private ProductJPA product;

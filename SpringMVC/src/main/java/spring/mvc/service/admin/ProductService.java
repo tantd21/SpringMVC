@@ -50,11 +50,11 @@ public class ProductService implements ImpProductService {
 	public void deleteProduct(Long productId) {
 		productJPARepository.deletedProduct(productId);
 	}
-	
+
 	@Override
-	public List<ProductJPA> getProductInNotFlashsale() {
+	public List<ProductJPA> getProductNotInFlashsale() {
 		// TODO Auto-generated method stub
-		return productJPARepository.findProductsInNotFlashsale();
+		return productJPARepository.findProductsNotInFlashsale();
 	}
 
 	@Override
@@ -108,8 +108,9 @@ public class ProductService implements ImpProductService {
 			try {
 				bytes = file.getBytes();
 				String nameFile = UUID.randomUUID() + file.getOriginalFilename();
-				Path path = Paths.get(
-						"E:\\eclipse-workspace-1\\SpringMVC\\src\\main\\webapp\\assets\\web\\img\\product\\" + nameFile);
+				Path path = Paths
+						.get("E:\\eclipse-workspace-1\\SpringMVC\\src\\main\\webapp\\assets\\web\\img\\product\\"
+								+ nameFile);
 //				File file2 = new File(path);
 				productJPA.setProductImage(nameFile);
 				Files.write(path, bytes);
@@ -142,6 +143,22 @@ public class ProductService implements ImpProductService {
 	}
 
 	@Override
+	public String unActiveProduct(Long productId, int status) {
+		productJPARepository.updateUnActiveProduct(productId, status);
+		String string = "";
+		if(status == 0) {
+			string = string + "<i style=\"color: rgb(196, 203, 196); font-size: 30px\"\r\n"
+					+ "class=\"mdi mdi-toggle-switch-off btn-un-active\"\r\n"
+					+ "data-product_id=\"" + productId + "\" data-status=\"1\"></i>";
+		}else {
+			string = string + "<i style=\"color: rgb(52, 211, 52); font-size: 30px\"\r\n"
+					+ "class=\"mdi mdi-toggle-switch btn-un-active\"\r\n"
+					+ "data-product_id=\"" + productId + "\" data-status=\"0\"></i>";
+		}
+		return string;
+	}
+
+	@Override
 	public void saveGallerys(List<MultipartFile> files, Long productId) {
 		// TODO Auto-generated method stub
 //		for(MultipartFile file: files) {
@@ -170,7 +187,8 @@ public class ProductService implements ImpProductService {
 				}
 			}
 		}
-	}	
+	}
+
 	@Override
 	public boolean deleteGallery(Long deleteId, String filename) {
 		String imageString = "E:\\eclipse-workspace-1\\SpringMVC\\src\\main\\webapp\\assets\\web\\img\\product\\"
@@ -184,16 +202,16 @@ public class ProductService implements ImpProductService {
 				System.out.println("File chưa xóa!");
 			}
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public boolean updateGalleryContent(Long galleryId, String galleryContent, int type) {
-		if(type == 1) {
-			galleryProductJPARepository.updateGalleryName(galleryId, galleryContent);	
-		}else {
+		if (type == 1) {
+			galleryProductJPARepository.updateGalleryName(galleryId, galleryContent);
+		} else {
 			galleryProductJPARepository.updateGalleryContent(galleryId, galleryContent);
 		}
 		return true;
